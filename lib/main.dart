@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate/profile/presentation/page/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,82 +16,137 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Meet Your Roommate Home Page'),
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+                "https://s3-alpha-sig.figma.com/img/e610/25e3/57b34eec3b7c4844788c8622dddf5161?Expires=1667174400&Signature=bypSqBglZeWGeR7MFyDepz9c832RPcpH8YgluShtz9ROWhaszS70BYBppiYDWJPAgFm2NLbP-jggjEAqbnctJpD8wC3tIEmhFVzraWozo4ZzCoF5Q7ag7ocAQF~xpIOLKrig6yT-YW4rJ-XmnsNeRnI1prKLGgqFGLDafDdYSNqjsqMGjsI-IPiIx7HwhTJaWVLIBq8btN3bmUAjAw-iFF8UCTJT8-CPfa-ihgr32CN13gXuCoi-~x0w6oBiLx5D3pQj~XwXBLalBvf7g4u~q~NdAo6j-ICBo~mL0P8XjOYymKeZu3iecR2iJscF0EHAhxiCjtNrxxNbyJhYQccMTA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+          verticalDirection: VerticalDirection.up,
+          children: [
+            Container(),
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50.0),
+                  topRight: Radius.circular(50.0),
+                ),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0, bottom: 40.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "lib/shared/assets/icon/logo.png",
+                          height: 80.0,
+                        ),
+                        const Text(
+                          "Meet Your\nRoommate",
+                          style: TextStyle(
+                            color: Color(0xff66030E),
+                            fontSize: 34.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 50.0,
+                        width: 200.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff66030E),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        height: 50.0,
+                        width: 200.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffC1C1C1),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Register",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 25.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Or Login With",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Image.asset(
+                          "lib/shared/assets/icon/google.png",
+                          height: 35.0,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
