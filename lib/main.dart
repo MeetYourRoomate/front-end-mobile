@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/profile/presentation/page/login_page.dart';
+
+import 'package:meet_your_roommate/rental_life_cycle/presentation/page/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const MainPageStudent(),
       debugShowCheckedModeBanner: false,
     );
   }
