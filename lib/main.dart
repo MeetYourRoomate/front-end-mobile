@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:meet_your_roommate/rental_life_cycle/presentation/page/main_page.dart';
 
 void main() {
