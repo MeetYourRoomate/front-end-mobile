@@ -106,7 +106,7 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                   child: Text(
                                     "Alquilo Departamento para estudiantes",
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 16.0,
                                     ),
                                   ),
