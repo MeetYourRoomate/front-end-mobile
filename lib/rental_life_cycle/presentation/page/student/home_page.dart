@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/property_page.dart';
+import 'package:meet_your_roommate/rental_life_cycle/presentation/page/student/property_page.dart';
 
 class HomePageStudent extends StatefulWidget {
   const HomePageStudent({super.key});
