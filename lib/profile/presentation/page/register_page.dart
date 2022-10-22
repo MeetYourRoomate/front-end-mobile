@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Email",
                                 style: TextStyle(
                                   fontSize: 15.0,
@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               const SizedBox(
                                 height: 20.0,
                               ),
-                              Text(
+                              const Text(
                                 "Password",
                                 style: TextStyle(
                                   fontSize: 15.0,
@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               const SizedBox(
                                 height: 20.0,
                               ),
-                              Text(
+                              const Text(
                                 "Confirm Password",
                                 style: TextStyle(
                                   fontSize: 15.0,
@@ -108,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         Container(
@@ -130,10 +130,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 30.0),
+                          padding: const EdgeInsets.symmetric(vertical: 30.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                            children: const [
                               Text(
                                 "Have account?",
                                 style: TextStyle(
@@ -147,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Text(
                                 "Login",
                                 style: TextStyle(
-                                  color: const Color(0xff66030E),
+                                  color: Color(0xff66030E),
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                 ),

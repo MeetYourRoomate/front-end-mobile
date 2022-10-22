@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Email",
                             style: TextStyle(
                               fontSize: 15.0,
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             height: 20.0,
                           ),
-                          Text(
+                          const Text(
                             "Password",
                             style: TextStyle(
                               fontSize: 15.0,
@@ -85,14 +85,14 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Forgot Password?",
                       style: TextStyle(
                         fontSize: 15.0,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Container(
@@ -114,10 +114,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(vertical: 30.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: const [
                           Text(
                             "Don't Have account?",
                             style: TextStyle(
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             "Create an Account",
                             style: TextStyle(
-                              color: const Color(0xff66030E),
+                              color: Color(0xff66030E),
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                             ),
