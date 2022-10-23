@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final VoidCallback showLoginPage;
+  const RegisterPage({super.key, required this.showLoginPage});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -29,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 Container(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 180.0),
+                  padding: const EdgeInsets.only(top: 50.0),
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -109,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         const SizedBox(
-                          height: 30.0,
+                          height: 10.0,
                         ),
                         Container(
                           height: 45.0,
@@ -129,27 +130,61 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                        const Text(
+                          "Continue With",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                        InkWell(
+                          onTap: () async {},
+                          child: Container(
+                            height: 35.0,
+                            width: 60.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                "lib/shared/assets/icon/google.png",
+                                height: 25.0,
+                              ),
+                            ),
+                          ),
+                        ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 30.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
                                 "Have account?",
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              SizedBox(
-                                height: 5.0,
+                              const SizedBox(
+                                width: 5.0,
                               ),
-                              Text(
-                                "Login",
-                                style: TextStyle(
-                                  color: Color(0xff66030E),
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w500,
+                              InkWell(
+                                onTap: widget.showLoginPage,
+                                child: const Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    color: Color(0xff66030E),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ],

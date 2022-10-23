@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate/iam/application/auth_service.dart';
+import 'package:meet_your_roommate/iam/application/user_service.dart';
+import 'package:meet_your_roommate/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final VoidCallback showLoginPage;
+  const LoginPage({super.key, required this.showLoginPage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late UserService userService;
+  late AuthService authService;
+
+  @override
+  void initState() {
+    userService = UserService();
+    authService = AuthService();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -38,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 35.0, bottom: 10.0),
+                      padding: const EdgeInsets.only(top: 25.0, bottom: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -93,47 +110,90 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30.0,
+                      height: 25.0,
                     ),
-                    Container(
-                      height: 45.0,
-                      width: 200.0,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff66030E),
-                        borderRadius: BorderRadius.circular(15.0),
+                    InkWell(
+                      onTap: () async {
+                        User user = await userService.getUser();
+                        print(user.title);
+                      },
+                      child: Container(
+                        height: 45.0,
+                        width: 200.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff66030E),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20.0,
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    const Text(
+                      "Continue With",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await authService.signInWithGoogle();
+                        userProvider.setIsLogged(isLogged: true);
+                      },
+                      child: Container(
+                        height: 35.0,
+                        width: 60.0,
+                        decoration: BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            "lib/shared/assets/icon/google.png",
+                            height: 25.0,
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Don't Have account?",
                             style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5.0,
                           ),
-                          Text(
-                            "Create an Account",
-                            style: TextStyle(
-                              color: Color(0xff66030E),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w500,
+                          InkWell(
+                            onTap: widget.showLoginPage,
+                            child: const Text(
+                              "Create an Account",
+                              style: TextStyle(
+                                color: Color(0xff66030E),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/profile/presentation/page/login_page.dart';
+import 'package:meet_your_roommate/profile/presentation/page/profile_page.dart';
 import 'package:meet_your_roommate/rental_life_cycle/presentation/page/student/home_page.dart';
 import 'package:meet_your_roommate/rental_life_cycle/presentation/page/student/rented_property.dart';
 import 'package:meet_your_roommate/roommate_coexistance/presentation/page/roomie_page.dart';
@@ -19,7 +19,7 @@ class _MainPageStudentState extends State<MainPageStudent> {
     const FavoritePage(),
     const RentedPropertyPage(),
     const RoomiePage(),
-    const LoginPage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -36,19 +36,23 @@ class _MainPageStudentState extends State<MainPageStudent> {
             label: "Home",
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.red,
             icon: Icon(Icons.favorite_border_outlined),
             label: "Favorite",
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.red,
             icon: Icon(Icons.key),
             label: "Rented",
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.red,
             icon: Icon(Icons.people),
             label: "roomie",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.verified_user),
+            backgroundColor: Colors.red,
+            icon: Icon(Icons.person),
             label: "user",
           ),
         ],
