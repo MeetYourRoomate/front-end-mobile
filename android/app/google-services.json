@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "928232146450",
+    "project_id": "meet-your-roommate-c7ed7",
+    "storage_bucket": "meet-your-roommate-c7ed7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928232146450:android:3409b7a25b92b2eea53acb",
+        "android_client_info": {
+          "package_name": "com.example.meet_your_roommate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928232146450-qmsa0n5ebqucvokcaegr1l5gnpi5lso3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meet_your_roommate",
+            "certificate_hash": "00759dc48f4806aead7e0117c53336f353f17326"
+          }
+        },
+        {
+          "client_id": "928232146450-cqhg4a0c3ljfq4d5bueto4usmbeutfo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1kracRNr0fMRJ64ZHkyc3vKpNrE0GR9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928232146450-cqhg4a0c3ljfq4d5bueto4usmbeutfo6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate/iam/application/auth_service.dart';
+import 'package:meet_your_roommate/iam/application/user_service.dart';
+import 'package:meet_your_roommate/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate/profile/domain/entity/user_profile.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final VoidCallback showLoginPage;
+  const LoginPage({super.key, required this.showLoginPage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late UserService userService;
+  late AuthService authService;
+
+  @override
+  void initState() {
+    userService = UserService();
+    authService = AuthService();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -19,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                  "https://s3-alpha-sig.figma.com/img/e610/25e3/57b34eec3b7c4844788c8622dddf5161?Expires=1667174400&Signature=bypSqBglZeWGeR7MFyDepz9c832RPcpH8YgluShtz9ROWhaszS70BYBppiYDWJPAgFm2NLbP-jggjEAqbnctJpD8wC3tIEmhFVzraWozo4ZzCoF5Q7ag7ocAQF~xpIOLKrig6yT-YW4rJ-XmnsNeRnI1prKLGgqFGLDafDdYSNqjsqMGjsI-IPiIx7HwhTJaWVLIBq8btN3bmUAjAw-iFF8UCTJT8-CPfa-ihgr32CN13gXuCoi-~x0w6oBiLx5D3pQj~XwXBLalBvf7g4u~q~NdAo6j-ICBo~mL0P8XjOYymKeZu3iecR2iJscF0EHAhxiCjtNrxxNbyJhYQccMTA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                  "http://contempo.com.pe/files/1/page-contents/shutterstock_568241401-1.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -38,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 35.0, bottom: 10.0),
+                      padding: const EdgeInsets.only(top: 25.0, bottom: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -93,47 +111,96 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30.0,
+                      height: 25.0,
                     ),
-                    Container(
-                      height: 45.0,
-                      width: 200.0,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff66030E),
-                        borderRadius: BorderRadius.circular(15.0),
+                    InkWell(
+                      onTap: () async {},
+                      child: Container(
+                        height: 45.0,
+                        width: 200.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff66030E),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20.0,
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    const Text(
+                      "Continue With",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        final user = await authService.signInWithGoogle();
+                        if (user != null) {
+                          UserAuth userAuth =
+                              UserAuth(user.uid, user.email, null, null);
+                          final saverUser =
+                              await userService.saveUser(userAuth);
+                        }
+                        userProvider.setIsLogged(isLogged: true);
+                        UserProfile userProfile =
+                            UserProfile(user?.displayName, user?.photoURL);
+                        userProvider.setUserProfile(userProfile);
+                      },
+                      child: Container(
+                        height: 35.0,
+                        width: 60.0,
+                        decoration: BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            "lib/shared/assets/icon/google.png",
+                            height: 25.0,
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Don't Have account?",
                             style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5.0,
                           ),
-                          Text(
-                            "Create an Account",
-                            style: TextStyle(
-                              color: Color(0xff66030E),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w500,
+                          InkWell(
+                            onTap: widget.showLoginPage,
+                            child: const Text(
+                              "Create an Account",
+                              style: TextStyle(
+                                color: Color(0xff66030E),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ],
