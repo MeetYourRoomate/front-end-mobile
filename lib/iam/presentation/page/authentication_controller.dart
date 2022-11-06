@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate/common/pages/student/main_page.dart';
 import 'package:meet_your_roommate/iam/presentation/page/user_controller.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/student/main_page.dart';
 
 class AuthenticationController extends StatelessWidget {
   const AuthenticationController({super.key});

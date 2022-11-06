@@ -1,12 +1,9 @@
 class Property {
-  int? _id;
-  String? _title;
+  final String? _tittle;
+  final String? _description;
 
-  set property(Property property) {
-    _id = property._id;
-    _title = property._title;
-  }
+  Property(this._description, this._tittle);
 
-  int? get id => _id;
-  String? get title => _title;
+  String? get description => _description;
+  String? get tittle => _tittle;
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate/rental_life_cycle/presentation/page/new_property/property_description.dart';
+import 'package:provider/provider.dart';
 
 class LessorHomePage extends StatefulWidget {
   const LessorHomePage({super.key});
@@ -10,6 +13,7 @@ class LessorHomePage extends StatefulWidget {
 class _LessorHomePageState extends State<LessorHomePage> {
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return SafeArea(
       child: Column(
         children: [
@@ -22,9 +26,9 @@ class _LessorHomePageState extends State<LessorHomePage> {
                       horizontal: 20.0, vertical: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("Juan Alberto"),
-                      Icon(Icons.notification_important),
+                    children: [
+                      Text("${userProvider.userProfile.name}"),
+                      const Icon(Icons.notification_important),
                     ],
                   ),
                 ),
@@ -64,7 +68,12 @@ class _LessorHomePageState extends State<LessorHomePage> {
               color: Colors.blueGrey,
               child: Center(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PropertyDescription()));
+                  },
                   child: Container(
                     height: 50.0,
                     width: 120.0,

@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate/rental_life_cycle/application/dto/property_service.dart';
+import 'package:meet_your_roommate/rental_life_cycle/domain/entity/property.dart';
 
 class PropertyDescription extends StatefulWidget {
   const PropertyDescription({super.key});
@@ -8,9 +11,26 @@ class PropertyDescription extends StatefulWidget {
 }
 
 class _PropertyDescriptionState extends State<PropertyDescription> {
+  final _descriptionController = TextEditingController();
+
+  late PropertyService propertyService;
+
+  @override
+  void initState() {
+    propertyService = PropertyService();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -54,8 +74,8 @@ class _PropertyDescriptionState extends State<PropertyDescription> {
                     const Text("Titulo"),
                     Center(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: 120.0,
+                        width: 350.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
@@ -63,15 +83,23 @@ class _PropertyDescriptionState extends State<PropertyDescription> {
                             color: Colors.blue,
                           ),
                         ),
-                        child: const TextField(
-                          maxLength: 160,
-                          decoration: InputDecoration(
+                        child: TextFormField(
+                          controller: _descriptionController,
+                          maxLength: 80,
+                          decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: "Ingrese Titulo aquí...",
                               filled: true,
                               fillColor: Colors.white),
                           textAlign: TextAlign.start,
-                          maxLines: 10,
+                          maxLines: 5,
+                          validator: ((value) {
+                            if (value!.isNotEmpty) {
+                              return "Texto Vacio";
+                            } else {
+                              return null;
+                            }
+                          }),
                         ),
                       ),
                     ),
@@ -82,83 +110,35 @@ class _PropertyDescriptionState extends State<PropertyDescription> {
             const SizedBox(
               height: 20.0,
             ),
-            Column(
-              children: [
-                Column(
-                  children: [
-                    const Text("Descripcion"),
-                    Center(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(
-                            width: 2,
-                            color: Colors.black,
-                          ),
-                        ),
-                        child: const TextField(
-                          maxLength: 160,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Ingrese Descripcion aquí...",
-                              filled: true,
-                              fillColor: Colors.white),
-                          textAlign: TextAlign.start,
-                          maxLines: 10,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Column(
-              children: [
-                Column(
-                  children: [
-                    const Text("Precio"),
-                    Center(
-                      child: Container(
-                        height: 70.0,
-                        width: 200.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(35.0),
-                          border: Border.all(
-                            width: 1,
-                            color: Colors.black,
-                          ),
-                        ),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.black),
-                              borderRadius: BorderRadius.circular(35.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                              borderRadius: BorderRadius.circular(35.0),
-                            ),
-                            border: InputBorder.none,
-                            hintText: "s. 70.00",
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                          textAlign: TextAlign.start,
-                          maxLines: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+            InkWell(
+              onTap: () async {
+                String? uid = FirebaseAuth.instance.currentUser?.uid;
+                if (_descriptionController.text.isNotEmpty && uid != null) {
+                  Property property =
+                      Property(_descriptionController.text, "Prueba Title");
+                  await propertyService.saveProperty(property, uid);
+                  Navigator.pop(context);
+                } else {
+                  print("Texto vacio");
+                }
+              },
+              child: Container(
+                height: 70.0,
+                width: 150.0,
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(width: 2.0, color: Colors.black),
+                ),
+                child: const Center(
+                    child: Text(
+                  "Crear",
+                  style: TextStyle(
+                    fontSize: 25.0,
+                  ),
+                )),
+              ),
+            )
           ],
         ),
       ),

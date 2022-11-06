@@ -52,7 +52,7 @@ class _MainPageStudentState extends State<MainPageStudent> {
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.red,
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.verified_user),
             label: "user",
           ),
         ],

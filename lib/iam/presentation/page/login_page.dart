@@ -3,6 +3,7 @@ import 'package:meet_your_roommate/iam/application/auth_service.dart';
 import 'package:meet_your_roommate/iam/application/user_service.dart';
 import 'package:meet_your_roommate/iam/domain/entity/user.dart';
 import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate/profile/domain/entity/user_profile.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                  "https://s3-alpha-sig.figma.com/img/e610/25e3/57b34eec3b7c4844788c8622dddf5161?Expires=1667174400&Signature=bypSqBglZeWGeR7MFyDepz9c832RPcpH8YgluShtz9ROWhaszS70BYBppiYDWJPAgFm2NLbP-jggjEAqbnctJpD8wC3tIEmhFVzraWozo4ZzCoF5Q7ag7ocAQF~xpIOLKrig6yT-YW4rJ-XmnsNeRnI1prKLGgqFGLDafDdYSNqjsqMGjsI-IPiIx7HwhTJaWVLIBq8btN3bmUAjAw-iFF8UCTJT8-CPfa-ihgr32CN13gXuCoi-~x0w6oBiLx5D3pQj~XwXBLalBvf7g4u~q~NdAo6j-ICBo~mL0P8XjOYymKeZu3iecR2iJscF0EHAhxiCjtNrxxNbyJhYQccMTA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                  "http://contempo.com.pe/files/1/page-contents/shutterstock_568241401-1.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -113,10 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 25.0,
                     ),
                     InkWell(
-                      onTap: () async {
-                        User user = await userService.getUser();
-                        print(user.title);
-                      },
+                      onTap: () async {},
                       child: Container(
                         height: 45.0,
                         width: 200.0,
@@ -152,8 +150,17 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     InkWell(
                       onTap: () async {
-                        await authService.signInWithGoogle();
+                        final user = await authService.signInWithGoogle();
+                        if (user != null) {
+                          UserAuth userAuth =
+                              UserAuth(user.uid, user.email, null, null);
+                          final saverUser =
+                              await userService.saveUser(userAuth);
+                        }
                         userProvider.setIsLogged(isLogged: true);
+                        UserProfile userProfile =
+                            UserProfile(user?.displayName, user?.photoURL);
+                        userProvider.setUserProfile(userProfile);
                       },
                       child: Container(
                         height: 35.0,
