@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.meet_your_roommate">
+    package="com.RZDN.meet_your_roommate_app">
    <application
-        android:label="Meet Your Roommate"
+        android:label="meet_your_roommate_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

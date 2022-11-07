@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/application/auth_service.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class RoomiePage extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/lessor/lessor_admin_page.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/lessor/lessor_home_page.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/lessor/lessor_menu_page.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/lessor/lessor_message_page.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_admin_page.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_home_page.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_menu_page.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_message_page.dart';
 
 class LessorMainPage extends StatefulWidget {
   const LessorMainPage({super.key});

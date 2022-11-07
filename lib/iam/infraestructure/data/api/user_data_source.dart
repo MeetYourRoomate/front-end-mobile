@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:meet_your_roommate/iam/infraestructure/models/user_model.dart';
+import 'package:meet_your_roommate_app/iam/infraestructure/models/user_model.dart';
 
 class UserDataSource {
   Future<UserModel> getUser() async {
@@ -16,6 +16,11 @@ class UserDataSource {
   Future<UserModel> saveUser(UserModel userModel) async {
     final bodyData = jsonEncode(userModel.toJson());
 
+    final responseValidated = await get(Uri.parse(
+        "https://meetyouroommate-backend.herokuapp.com/api/v1/users/${userModel.id}"));
+    if (responseValidated.body != "User not found.") {
+      return UserModel.fromJson(jsonDecode(responseValidated.body));
+    }
     final response = await post(
         Uri.parse(
           "https://meetyouroommate-backend.herokuapp.com/api/v1/users/register",
@@ -28,6 +33,7 @@ class UserDataSource {
     if (response.statusCode == 200) {
       return UserModel.fromJson(jsonDecode(response.body));
     } else {
+      print(response.body);
       throw Exception("fallo la llamada");
     }
   }

@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:928232146450:android:3409b7a25b92b2eea53acb",
+        "mobilesdk_app_id": "1:928232146450:android:92a68c0ffc8c187ca53acb",
         "android_client_info": {
-          "package_name": "com.example.meet_your_roommate"
+          "package_name": "com.RZDN.meet_your_roommate_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "928232146450-qmsa0n5ebqucvokcaegr1l5gnpi5lso3.apps.googleusercontent.com",
+          "client_id": "928232146450-mp5jl1cq4951g00pfe1s8j21vitglfpu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.meet_your_roommate",
+            "package_name": "com.RZDN.meet_your_roommate_app",
             "certificate_hash": "00759dc48f4806aead7e0117c53336f353f17326"
           }
         },
@@ -28,7 +28,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB1kracRNr0fMRJ64ZHkyc3vKpNrE0GR9Q"
+          "current_key": "AIzaSyCQ7nXlh-SxN-G4T_YJqUGolkweogbaJ3k"
         }
       ],
       "services": {

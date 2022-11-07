@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:meet_your_roommate/rental_life_cycle/infraestructure/models/property_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_model.dart';
 
 class PropertyDataSource {
   Future<void> saveProperty(PropertyModel propertyModel, String uid) async {
@@ -8,7 +8,7 @@ class PropertyDataSource {
 
     final response = await post(
         Uri.parse(
-          "https://meetyouroommate-backend.herokuapp.com/api/v1/properties?userid=$uid",
+          "https://meetyouroommate-backend.herokuapp.com/api/v1/users/$uid/rental/offer",
         ),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',

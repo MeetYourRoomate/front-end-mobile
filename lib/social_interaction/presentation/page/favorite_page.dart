@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class FavoritePage extends StatefulWidget {

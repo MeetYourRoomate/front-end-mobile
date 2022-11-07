@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/application/auth_service.dart';
-import 'package:meet_your_roommate/iam/application/user_service.dart';
-import 'package:meet_your_roommate/iam/domain/entity/user.dart';
-import 'package:meet_your_roommate/iam/presentation/page/auth_page.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
+import 'package:meet_your_roommate_app/iam/application/user_service.dart';
+import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/auth_page.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
+import 'package:provider/provider.dart';
 
 class ReviewProperty extends StatefulWidget {
   const ReviewProperty({super.key});
@@ -10,6 +12,7 @@ class ReviewProperty extends StatefulWidget {
 class _ReviewPropertyState extends State<ReviewProperty> {
   @override
   Widget build(BuildContext context) {
+    final propertyProvider = Provider.of<PropertyProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -64,7 +67,8 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const Text("El mejor inmueble de Lima"),
+                  Text(propertyProvider.title),
+                  Text("Precio : ${propertyProvider.price.toString()}"),
                   Container(
                     padding: const EdgeInsets.all(15.0),
                     height: 120,
@@ -107,20 +111,20 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Descripcion",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Text(
-                        "Departamento en Alquiler frente a la UPC de los Cedros de Chorrillos, Ideal para familia pequeña o estudiantes de la universidad muy amplia, cerca a todo lo que puedas necesitar.",
-                        style: TextStyle(
+                        propertyProvider.description,
+                        style: const TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                         ),
@@ -181,7 +185,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          "Descripcion",
+                          "Direccion",
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w700,

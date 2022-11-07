@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/application/auth_service.dart';
-import 'package:meet_your_roommate/iam/application/user_service.dart';
-import 'package:meet_your_roommate/iam/domain/entity/user.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
-import 'package:meet_your_roommate/profile/domain/entity/user_profile.dart';
+import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
+import 'package:meet_your_roommate_app/iam/application/user_service.dart';
+import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
+
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -156,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                               UserAuth(user.uid, user.email, null, null);
                           final saverUser =
                               await userService.saveUser(userAuth);
+                          print(saverUser.id);
                         }
                         userProvider.setIsLogged(isLogged: true);
                         UserProfile userProfile =

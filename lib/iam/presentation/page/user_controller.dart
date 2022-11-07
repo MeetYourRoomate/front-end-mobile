@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/common/pages/lessor/lessor_main_page.dart';
-import 'package:meet_your_roommate/common/pages/student/main_page.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/common/pages/lessor/lessor_main_page.dart';
+import 'package:meet_your_roommate_app/common/pages/student/main_page.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class UserController extends StatefulWidget {

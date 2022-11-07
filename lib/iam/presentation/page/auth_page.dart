@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/presentation/page/login_page.dart';
-import 'package:meet_your_roommate/iam/presentation/page/register_page.dart';
+
+import 'package:meet_your_roommate_app/iam/presentation/page/login_page.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/register_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
-import 'package:meet_your_roommate/rental_life_cycle/presentation/page/new_property/property_description.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/type_property.dart';
 import 'package:provider/provider.dart';
 
 class LessorHomePage extends StatefulWidget {
@@ -72,7 +72,7 @@ class _LessorHomePageState extends State<LessorHomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const PropertyDescription()));
+                            builder: (context) => const TypePropertyPage()));
                   },
                   child: Container(
                     height: 50.0,

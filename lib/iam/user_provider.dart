@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:meet_your_roommate/profile/domain/entity/user_profile.dart';
+import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 
 class UserProvider with ChangeNotifier {
   UserProvider(this._isLogged);

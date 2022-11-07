@@ -1,7 +1,7 @@
-import 'package:meet_your_roommate/rental_life_cycle/domain/entity/property.dart';
-import 'package:meet_your_roommate/rental_life_cycle/domain/interface/property_interface.dart';
-import 'package:meet_your_roommate/rental_life_cycle/infraestructure/data/api/property_data_source.dart';
-import 'package:meet_your_roommate/rental_life_cycle/infraestructure/models/property_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/interface/property_interface.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/data/api/property_data_source.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_model.dart';
 
 class PropertyRepository implements PropertyInterface {
   final PropertyDataSource _propertyDataSource = PropertyDataSource();
@@ -20,8 +20,12 @@ class PropertyRepository implements PropertyInterface {
 
   @override
   Future<void> saveProperty(Property property, String uid) async {
-    PropertyModel propertyModel =
-        PropertyModel(property.description, property.tittle);
+    PropertyModel propertyModel = PropertyModel(
+        property.description,
+        property.tittle,
+        property.currency,
+        property.conditions,
+        property.price);
     await _propertyDataSource.saveProperty(propertyModel, uid);
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/iam/application/auth_service.dart';
-import 'package:meet_your_roommate/iam/presentation/page/auth_page.dart';
-import 'package:meet_your_roommate/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+
 import 'package:provider/provider.dart';
+
+import '../../../../iam/presentation/page/auth_page.dart';
 
 class LessorMenuPage extends StatefulWidget {
   const LessorMenuPage({super.key});

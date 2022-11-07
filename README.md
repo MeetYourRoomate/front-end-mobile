@@ -1,4 +1,4 @@
-# Meet Your Roommate
+# meet_your_roommate_app
 
 A new Flutter project.
 

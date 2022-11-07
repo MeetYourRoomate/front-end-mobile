@@ -1,4 +1,4 @@
-import 'package:meet_your_roommate/rental_life_cycle/domain/entity/property.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
 
 abstract class PropertyInterface {
   Future<List<Property>> getProperties();

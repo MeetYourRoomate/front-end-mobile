@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate/rental_life_cycle/application/dto/property_service.dart';
-import 'package:meet_your_roommate/rental_life_cycle/domain/entity/property.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/dto/property_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
+import 'package:provider/provider.dart';
 
 class PropertyDescription extends StatefulWidget {
   const PropertyDescription({super.key});
@@ -29,8 +29,8 @@ class _PropertyDescriptionState extends State<PropertyDescription> {
 
   @override
   Widget build(BuildContext context) {
+    final propertyProvider = Provider.of<PropertyProvider>(context);
     return Scaffold(
-      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -67,78 +67,127 @@ class _PropertyDescriptionState extends State<PropertyDescription> {
             const SizedBox(
               height: 20.0,
             ),
-            Column(
-              children: [
-                Column(
-                  children: [
-                    const Text("Titulo"),
-                    Center(
-                      child: Container(
-                        height: 120.0,
-                        width: 350.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(
-                            width: 2,
-                            color: Colors.blue,
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  Column(
+                    children: [
+                      const Text("Titulo"),
+                      Center(
+                        child: Container(
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: TextFormField(
+                            maxLength: 80,
+                            onChanged: (value) {
+                              propertyProvider.setTitle(value);
+                            },
+                            decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Ingrese Titulo aquí...",
+                                filled: true,
+                                fillColor: Colors.white),
+                            textAlign: TextAlign.start,
+                            maxLines: 5,
+                            validator: ((value) {
+                              if (value!.isNotEmpty) {
+                                return "Texto Vacio";
+                              } else {
+                                return null;
+                              }
+                            }),
                           ),
                         ),
-                        child: TextFormField(
-                          controller: _descriptionController,
-                          maxLength: 80,
-                          decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Ingrese Titulo aquí...",
-                              filled: true,
-                              fillColor: Colors.white),
-                          textAlign: TextAlign.start,
-                          maxLines: 5,
-                          validator: ((value) {
-                            if (value!.isNotEmpty) {
-                              return "Texto Vacio";
-                            } else {
-                              return null;
-                            }
-                          }),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Column(
+                    children: [
+                      const Text("Descripcion"),
+                      Center(
+                        child: Container(
+                          height: 130.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: TextFormField(
+                            maxLength: 160,
+                            onChanged: (value) {
+                              propertyProvider.setDescription(value);
+                            },
+                            decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Ingrese descripcion aquí...",
+                                filled: true,
+                                fillColor: Colors.white),
+                            textAlign: TextAlign.start,
+                            maxLines: 5,
+                            validator: ((value) {
+                              if (value!.isNotEmpty) {
+                                return "Texto Vacio";
+                              } else {
+                                return null;
+                              }
+                            }),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            InkWell(
-              onTap: () async {
-                String? uid = FirebaseAuth.instance.currentUser?.uid;
-                if (_descriptionController.text.isNotEmpty && uid != null) {
-                  Property property =
-                      Property(_descriptionController.text, "Prueba Title");
-                  await propertyService.saveProperty(property, uid);
-                  Navigator.pop(context);
-                } else {
-                  print("Texto vacio");
-                }
-              },
-              child: Container(
-                height: 70.0,
-                width: 150.0,
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all(width: 2.0, color: Colors.black),
-                ),
-                child: const Center(
-                    child: Text(
-                  "Crear",
-                  style: TextStyle(
-                    fontSize: 25.0,
+                    ],
                   ),
-                )),
+                  const SizedBox(height: 20),
+                  Column(
+                    children: [
+                      const Text("Precio"),
+                      Center(
+                        child: Container(
+                          height: 70.0,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              propertyProvider.setPrice(int.parse(value));
+                            },
+                            decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "300",
+                                filled: true,
+                                fillColor: Colors.white),
+                            textAlign: TextAlign.start,
+                            maxLines: 5,
+                            validator: ((value) {
+                              if (value!.isNotEmpty) {
+                                return "Texto Vacio";
+                              } else {
+                                return null;
+                              }
+                            }),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),

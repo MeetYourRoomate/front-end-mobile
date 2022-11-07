@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
+import 'package:provider/provider.dart';
 
 class PropertyDirection extends StatefulWidget {
   const PropertyDirection({super.key});
@@ -10,6 +12,7 @@ class PropertyDirection extends StatefulWidget {
 class _PropertyDirectionState extends State<PropertyDirection> {
   @override
   Widget build(BuildContext context) {
+    final propertyProvider = Provider.of<PropertyProvider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -68,21 +71,19 @@ class _PropertyDirectionState extends State<PropertyDirection> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Icon(Icons.location_on_sharp),
-                          SizedBox(
-                            width: 10.0,
+                      child: TextFormField(
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16.0,
+                        ),
+                        onChanged: (value) {},
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.location_on_rounded,
+                            color: Colors.black,
                           ),
-                          Text(
-                            "Vivienda Rentada",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
