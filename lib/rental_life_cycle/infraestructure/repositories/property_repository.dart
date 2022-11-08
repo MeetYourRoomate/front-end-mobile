@@ -25,7 +25,11 @@ class PropertyRepository implements PropertyInterface {
         property.tittle,
         property.currency,
         property.conditions,
-        property.price);
+        property.price,
+        property.assets,
+        property.propertyId,
+        property.rentalOfferId,
+        property.userProfile);
     await _propertyDataSource.saveProperty(propertyModel, uid);
   }
 }

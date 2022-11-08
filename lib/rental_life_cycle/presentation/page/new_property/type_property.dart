@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/application/dto/property_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_asset_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/model_property.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/property_description.dart';
@@ -20,10 +21,12 @@ class TypePropertyPage extends StatefulWidget {
 
 class _TypePropertyPageState extends State<TypePropertyPage> {
   late PropertyService propertyService;
+  late PropertyAssetService propertyAssetService;
 
   @override
   void initState() {
     propertyService = PropertyService();
+    propertyAssetService = PropertyAssetService();
     super.initState();
   }
 
@@ -93,7 +96,11 @@ class _TypePropertyPageState extends State<TypePropertyPage> {
                                   propertyProvider.title,
                                   propertyProvider.currency,
                                   propertyProvider.conditions,
-                                  propertyProvider.price);
+                                  propertyProvider.price,
+                                  null,
+                                  null,
+                                  null,
+                                  null);
                               await propertyService.saveProperty(property,
                                   FirebaseAuth.instance.currentUser!.uid);
                             },

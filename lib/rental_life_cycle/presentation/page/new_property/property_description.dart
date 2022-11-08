@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/application/dto/property_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
 import 'package:provider/provider.dart';
 

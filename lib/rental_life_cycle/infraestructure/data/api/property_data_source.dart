@@ -21,4 +21,22 @@ class PropertyDataSource {
       throw Exception("fallo la llamada");
     }
   }
+
+  Future<List<PropertyModel>> getProperties() async {
+    final response = await get(
+      Uri.parse(
+          "https://meetyouroommate-backend.herokuapp.com//api/v1/rentaloffers/all"),
+    );
+
+    if (response.statusCode == 200) {
+      List<PropertyModel> listProperties = [];
+      for (int i = 0; i < response.body.length; i++) {
+        listProperties.add(PropertyModel.fromJson(jsonDecode(response.body)));
+      }
+      return listProperties;
+    } else {
+      print(response.body);
+      throw Exception("fallo la llamada");
+    }
+  }
 }

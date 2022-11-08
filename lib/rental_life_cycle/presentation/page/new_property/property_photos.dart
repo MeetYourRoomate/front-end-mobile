@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_asset_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_asset.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,9 +19,15 @@ class _PropertyPhotosState extends State<PropertyPhotos> {
   final ImagePicker _imagePicker = ImagePicker();
   List<File?> selectedImage = [];
   final storage = FirebaseStorage.instance.ref();
-
-  List imagesPaths = [];
+  late PropertyAssetService propertyAssetService;
+  List<PropertyAsset> property_asset = [];
   bool hasImage = false;
+
+  @override
+  void initState() {
+    propertyAssetService = PropertyAssetService();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,15 +122,21 @@ class _PropertyPhotosState extends State<PropertyPhotos> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          for (int i = 0; i < selectedImage.length; i++) {
-            var imagePath = "images/imagen-$i";
-            final storaef = storage.child(imagePath);
-            await storaef.putFile(selectedImage[i]!);
-            final imageUrl = await storage.child(imagePath).getDownloadURL();
-            imagesPaths.add(imageUrl);
+          if (propertyProvider.selectedImage.isNotEmpty) {
+            for (int i = 0; i < propertyProvider.selectedImage.length; i++) {
+              var imagePath = "images/3/image_$i";
+              final storaef = storage.child(imagePath);
+              await storaef.putFile(propertyProvider.selectedImage[i]!);
+              final imageUrl = await storage.child(imagePath).getDownloadURL();
+              property_asset.add(PropertyAsset(imageUrl));
+              print("Enviando objetos$i");
+            }
           }
-
-          print(imagesPaths);
+          print("Enviando Data Backend");
+          if (property_asset.isNotEmpty) {
+            await propertyAssetService.saveListPropertyAssets(
+                property_asset, 3);
+          }
         },
         child: Icon(Icons.send),
       ),

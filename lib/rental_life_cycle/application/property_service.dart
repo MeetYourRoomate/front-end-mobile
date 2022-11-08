@@ -1,5 +1,5 @@
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/repositories/propertyRepository.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/repositories/property_repository.dart';
 
 class PropertyService {
   final PropertyRepository _propertyRepository = PropertyRepository();
