@@ -18,7 +18,8 @@ class UserDataSource {
 
     final responseValidated = await get(Uri.parse(
         "https://meetyouroommate-backend.herokuapp.com/api/v1/users/${userModel.id}"));
-    if (responseValidated.body != "User not found.") {
+    if (responseValidated.statusCode == 200) {
+      print(responseValidated.body);
       return UserModel.fromJson(jsonDecode(responseValidated.body));
     }
     final response = await post(
@@ -31,6 +32,7 @@ class UserDataSource {
         body: bodyData);
 
     if (response.statusCode == 200) {
+      print(response.body);
       return UserModel.fromJson(jsonDecode(response.body));
     } else {
       print(response.body);

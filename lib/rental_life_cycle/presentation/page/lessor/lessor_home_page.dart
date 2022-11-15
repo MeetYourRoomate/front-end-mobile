@@ -26,9 +26,9 @@ class _LessorHomePageState extends State<LessorHomePage> {
                       horizontal: 20.0, vertical: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("${userProvider.userProfile.name}"),
-                      const Icon(Icons.notification_important),
+                    children: const [
+                      Text("nn"),
+                      Icon(Icons.notification_important),
                     ],
                   ),
                 ),

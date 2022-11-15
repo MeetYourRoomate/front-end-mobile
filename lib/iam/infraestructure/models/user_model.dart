@@ -4,10 +4,10 @@ class UserModel extends UserAuth {
   UserModel(super.id, super.email, super.active, super.role);
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      json["id"],
-      json["email"]["adress"],
-      json["active"],
-      json["role"]["name"],
+      json["resource"]["id"],
+      json["resource"]["email"]["adress"],
+      json["resource"]["active"],
+      json["resource"]["role"]["name"],
     );
   }
   Map<String, dynamic> toJson() {

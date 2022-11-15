@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
 
 class PropertyPage extends StatefulWidget {
-  const PropertyPage({super.key});
+  final RentalOffer rentalOffer;
+  const PropertyPage({super.key, required this.rentalOffer});
 
   @override
   State<PropertyPage> createState() => _PropertyPageState();
@@ -85,8 +87,8 @@ class _PropertyPageState extends State<PropertyPage> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text("Francisco Torres  Paredes"),
+                          children: [
+                            Text(widget.rentalOffer.userProfile!.name!),
                             Text("8 Propiedades"),
                             Text("5 Huéspedes"),
                           ],

@@ -3,6 +3,7 @@ import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
 import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 
 import 'package:provider/provider.dart';
@@ -18,11 +19,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late UserService userService;
   late AuthService authService;
+  late UserProfileService userProfileService;
 
   @override
   void initState() {
     userService = UserService();
     authService = AuthService();
+    userProfileService = UserProfileService();
     super.initState();
   }
 
@@ -151,18 +154,38 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     InkWell(
                       onTap: () async {
+                        final navigator = Navigator.of(context);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        );
                         final user = await authService.signInWithGoogle();
                         if (user != null) {
                           UserAuth userAuth =
                               UserAuth(user.uid, user.email, null, null);
                           final saverUser =
                               await userService.saveUser(userAuth);
-                          print(saverUser.id);
+                          // ignore: avoid_print
+                          print(saverUser);
+                          UserProfile userProfile = UserProfile(
+                            user.displayName,
+                            user.photoURL,
+                            "",
+                            user.phoneNumber,
+                            "",
+                            "",
+                            "",
+                            null,
+                          );
+                          await userProfileService.saveUserProfile(
+                              userProfile, user.uid);
                         }
                         userProvider.setIsLogged(isLogged: true);
-                        UserProfile userProfile =
-                            UserProfile(user?.displayName, user?.photoURL);
-                        userProvider.setUserProfile(userProfile);
+                        navigator.pop();
                       },
                       child: Container(
                         height: 35.0,
