@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 import 'package:meet_your_roommate_app/profile/presentation/page/profile_page.dart';
@@ -40,33 +41,33 @@ class _MainPageStudentState extends State<MainPageStudent> {
     return Scaffold(
       body: pages[_index],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.red,
+        backgroundColor: ColorsApp.primeryColor,
         currentIndex: _index,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.red,
-            icon: Icon(Icons.search),
-            label: "Home",
+            backgroundColor: ColorsApp.primeryColor,
+            icon: const Icon(Icons.search),
+            label: "Search",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.red,
-            icon: Icon(Icons.favorite_border_outlined),
-            label: "Favorite",
+            backgroundColor: ColorsApp.primeryColor,
+            icon: const Icon(Icons.favorite_border_outlined),
+            label: "Favorites",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.red,
-            icon: Icon(Icons.key),
+            backgroundColor: ColorsApp.primeryColor,
+            icon: const Icon(Icons.key),
             label: "Rented",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.red,
-            icon: Icon(Icons.people),
-            label: "roomie",
+            backgroundColor: ColorsApp.primeryColor,
+            icon: const Icon(Icons.people),
+            label: "Roomie",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.red,
-            icon: Icon(Icons.verified_user),
-            label: "user",
+            backgroundColor: ColorsApp.primeryColor,
+            icon: const Icon(Icons.verified_user),
+            label: "User",
           ),
         ],
         onTap: ((value) async {

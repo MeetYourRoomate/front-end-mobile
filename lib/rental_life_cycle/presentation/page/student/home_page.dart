@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_offer_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/student/property_page.dart';
@@ -22,6 +23,8 @@ class _HomePageStudentState extends State<HomePageStudent> {
       });
     }
   }
+
+  bool isFavorite = false;
 
   @override
   void initState() {
@@ -98,38 +101,38 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                     decoration: BoxDecoration(
                                       color: Colors.yellow,
                                       borderRadius: BorderRadius.circular(15.0),
-                                      image: const DecorationImage(
+                                      image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
-                                          "https://images.adsttc.com/media/images/5f90/e509/63c0/1779/0100/010e/newsletter/3.jpg?1603331288",
+                                          listRentalOffer[index]
+                                              .property!
+                                              .assets!
+                                              .first
+                                              .imageUrl!,
                                         ),
                                       ),
                                     ),
                                   ),
-                                  const Positioned(
+                                  Positioned(
                                     top: 10.0,
                                     right: 15.0,
-                                    child: Icon(
-                                      Icons.favorite_border_outlined,
-                                      size: 35.0,
-                                    ),
+                                    child: isFavorite
+                                        ? const Icon(
+                                            Icons.favorite_sharp,
+                                            color: Colors.red,
+                                            size: 30.0,
+                                          )
+                                        : const Icon(
+                                            Icons.favorite_border_outlined,
+                                            color: Colors.black,
+                                            size: 30.0,
+                                          ),
                                   ),
-                                  const Positioned(
-                                      bottom: 10.0,
-                                      right: 15.0,
-                                      child: Text(
-                                        "Chorrillos, Lima",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 18.0,
-                                        ),
-                                      )),
                                 ],
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 15.0),
+                                    const EdgeInsets.symmetric(vertical: 5.0),
                                 child: Column(
                                   children: [
                                     Row(
@@ -145,6 +148,9 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                             ),
                                           ),
                                         ),
+                                        Container(
+                                          width: 20,
+                                        ),
                                         Row(
                                           children: const [
                                             Icon(
@@ -159,25 +165,23 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 10.0),
+                                          vertical: 5.0),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            listRentalOffer[index]
-                                                .price
-                                                .toString(),
-                                            style: TextStyle(
+                                            "\$.${listRentalOffer[index].price.toString()} / month",
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w700,
-                                              fontSize: 24.0,
+                                              fontSize: 18.0,
                                             ),
                                           ),
-                                          Text(
-                                            "42.0 m2",
+                                          const Text(
+                                            "40 m2",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w400,
-                                              fontSize: 20.0,
+                                              fontSize: 18.0,
                                             ),
                                           ),
                                         ],
@@ -196,9 +200,9 @@ class _HomePageStudentState extends State<HomePageStudent> {
               ],
             ),
           )
-        : const Center(
+        : Center(
             child: CircularProgressIndicator(
-            color: Colors.blue,
+            color: ColorsApp.primaryColor2,
           ));
   }
 }

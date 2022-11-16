@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/profile/presentation/widget/hosted_profile_widget.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/image_carousel.dart';
 
 class PropertyPage extends StatefulWidget {
   final RentalOffer rentalOffer;
@@ -12,20 +14,34 @@ class PropertyPage extends StatefulWidget {
 class _PropertyPageState extends State<PropertyPage> {
   @override
   Widget build(BuildContext context) {
+    final data = widget.rentalOffer.property!.assets;
+    final List images = data!.map((e) => e.imageUrl).toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
-                Container(
-                  height: 300.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        "https://images.adsttc.com/media/images/5f90/e509/63c0/1779/0100/010e/newsletter/3.jpg?1603331288",
+                ImageCarouselWidget(images: images),
+                Positioned(
+                  left: 10,
+                  top: 50,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -34,14 +50,14 @@ class _PropertyPageState extends State<PropertyPage> {
             ),
             Container(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                  const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Alquilo departamento  para estudiante",
-                    style: TextStyle(
-                      fontSize: 18.0,
+                  Text(
+                    widget.rentalOffer.property!.tittle!,
+                    style: const TextStyle(
+                      fontSize: 26.0,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -54,73 +70,52 @@ class _PropertyPageState extends State<PropertyPage> {
                           children: const [
                             Icon(
                               Icons.star,
-                              size: 20.0,
+                              size: 25.0,
                               color: Colors.orange,
                             ),
-                            Text(" 4.8"),
+                            Text(
+                              " 4.8",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
                           ],
                         ),
-                        const Text("Chorrillos, lima"),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(15.0),
-                    height: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(width: 2.0, color: Colors.black),
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black38,
-                            blurRadius: 5.0,
-                            offset: Offset(
-                              4.0,
-                              4.0,
-                            )),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(widget.rentalOffer.userProfile!.name!),
-                            Text("8 Propiedades"),
-                            Text("5 Huéspedes"),
-                          ],
+                        Text(
+                          "\$.${widget.rentalOffer.price}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
-                        const CircleAvatar(
-                          radius: 40.0,
-                          backgroundImage: NetworkImage(
-                              "https://fotografias.lasexta.com/clipping/cmsimages02/2022/05/03/6F9C82A4-0FA4-40F9-BE2F-87F8DBBC1224/elon-musk-met-gala_103.jpg?crop=1407,1055,x0,y18&width=1200&height=900&optimize=low&format=webply"),
-                        )
                       ],
                     ),
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
+                  HostedProfileWidget(
+                    userProfile: widget.rentalOffer.userProfile!,
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Descripcion",
+                    children: [
+                      const Text(
+                        "Description",
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 24.0,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Text(
-                        "Departamento en Alquiler frente a la UPC de los Cedros de Chorrillos, Ideal para familia pequeña o estudiantes de la universidad muy amplia, cerca a todo lo que puedas necesitar.",
-                        style: TextStyle(
-                          fontSize: 14.0,
+                        widget.rentalOffer.property!.description!,
+                        style: const TextStyle(
+                          fontSize: 16.0,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -137,7 +132,7 @@ class _PropertyPageState extends State<PropertyPage> {
                         const Text(
                           "Servicios",
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 24.0,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -153,21 +148,29 @@ class _PropertyPageState extends State<PropertyPage> {
                               child: Row(
                                 children: const [
                                   Icon(Icons.kitchen),
-                                  Text("      Cocina"),
+                                  Text("      kitchen"),
                                 ],
                               ),
                             ),
-                            Row(
-                              children: const [
-                                Icon(Icons.wifi),
-                                Text("      Cocina"),
-                              ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.wifi),
+                                  Text("      Wify"),
+                                ],
+                              ),
                             ),
-                            Row(
-                              children: const [
-                                Icon(Icons.wash_rounded),
-                                Text("      Cocina"),
-                              ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.wash_rounded),
+                                  Text("      whas"),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -180,9 +183,9 @@ class _PropertyPageState extends State<PropertyPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          "Descripcion",
+                          "Location",
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 24.0,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -218,7 +221,7 @@ class _PropertyPageState extends State<PropertyPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Evaluaciones",
+                          "Reviews",
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w700,
@@ -307,13 +310,13 @@ class _PropertyPageState extends State<PropertyPage> {
         ),
       ),
       floatingActionButton: Container(
-        height: 40,
-        width: 80,
+        height: 50,
+        width: 100,
         decoration: BoxDecoration(
           color: Colors.red,
           borderRadius: BorderRadius.circular(20.0),
         ),
-        child: const Center(child: Text("Enviar")),
+        child: const Center(child: Text("Reserve")),
       ),
     );
   }
