@@ -1,38 +1,21 @@
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_asset_model.dart';
 
 class PropertyModel extends Property {
-  PropertyModel(
-      super.description,
-      super.tittle,
-      super.currency,
-      super.conditions,
-      super.price,
-      super.assets,
-      super.propertyId,
-      super.rentalOfferId,
-      super.userProfile);
+  PropertyModel(super.description, super.tittle, super.assets, super.id);
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
+    List<PropertyAssetModel> listAssets = json["assets"]
+        .map<PropertyAssetModel>((json) => PropertyAssetModel.fromJson(json))
+        .toList();
     return PropertyModel(
-        json["property"]["description"],
-        json["property"]["title"],
-        json["amount"]["currency"],
-        json["conditions"],
-        json["amount"]["price"],
-        json["assets"],
-        json["property"]["id"],
-        json["id"],
-        json["profile"]);
+        json["description"], json["title"], listAssets, json["id"]);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "rentalOfferingResource": {
-        "lifecycle": {"endAt": "2022-12-08T15:04:23.226Z"},
-        "amount": {"price": price, "currency": currency},
-        "conditions": conditions
-      },
-      "propertyResource": {"title": tittle, "description": description}
+      "title": tittle,
+      "description": description,
     };
   }
 }

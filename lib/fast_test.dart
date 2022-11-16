@@ -12,7 +12,7 @@ class FatTest extends StatefulWidget {
 }
 
 class _FatTestState extends State<FatTest> {
-  final UserProfileDataSource _userProfileDataSource = UserProfileDataSource();
+  // final UserProfileDataSource _userProfileDataSource = UserProfileDataSource();
   final RentalOfferDataSource _rentalOfferDataSource = RentalOfferDataSource();
 
   @override
@@ -24,7 +24,7 @@ class _FatTestState extends State<FatTest> {
           onTap: () async {
             List<RentalOfferModel> data =
                 await _rentalOfferDataSource.getRentalOffers();
-            print(data.first.currency);
+            print(data[0].property!.assets![0].imageUrl);
           },
           child: Container(
             height: 70,

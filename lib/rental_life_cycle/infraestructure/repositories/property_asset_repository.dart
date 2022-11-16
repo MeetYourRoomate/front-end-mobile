@@ -23,7 +23,7 @@ class PropertyAssetRepository implements PropertyAssetInterface {
       List<PropertyAsset> assets, int id) async {
     List<PropertyAssetModel> listAssets = [];
     for (int i = 0; i < assets.length; i++) {
-      listAssets.add(PropertyAssetModel(assets[i].imageUrl));
+      listAssets.add(PropertyAssetModel(assets[i].imageUrl, null));
     }
     await _assetDataSource.saveListPropertyAssets(listAssets, id);
   }

@@ -92,15 +92,11 @@ class _TypePropertyPageState extends State<TypePropertyPage> {
                         ? InkWell(
                             onTap: () async {
                               Property property = Property(
-                                  propertyProvider.description,
-                                  propertyProvider.title,
-                                  propertyProvider.currency,
-                                  propertyProvider.conditions,
-                                  propertyProvider.price,
-                                  null,
-                                  null,
-                                  null,
-                                  null);
+                                propertyProvider.description,
+                                propertyProvider.title,
+                                null,
+                                null,
+                              );
                               await propertyService.saveProperty(property,
                                   FirebaseAuth.instance.currentUser!.uid);
                             },

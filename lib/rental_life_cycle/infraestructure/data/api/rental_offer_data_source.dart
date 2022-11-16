@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/rental_offer_model.dart';
 
 class RentalOfferDataSource {

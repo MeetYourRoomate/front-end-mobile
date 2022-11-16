@@ -16,16 +16,18 @@ class _HomePageStudentState extends State<HomePageStudent> {
 
   Future fetchRentalOffer() async {
     final data = await _rentalOfferService.getVisibleRentalOffer();
-    setState(() {
-      listRentalOffer = data;
-    });
+    if (mounted) {
+      setState(() {
+        listRentalOffer = data;
+      });
+    }
   }
 
   @override
   void initState() {
     _rentalOfferService = RentalOfferService();
-    super.initState();
     fetchRentalOffer();
+    super.initState();
   }
 
   @override

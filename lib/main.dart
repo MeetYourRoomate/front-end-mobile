@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.yellow,
         ),
-        home: const AuthenticationController(),
+        home: const FatTest(),
       ),
     );
   }
