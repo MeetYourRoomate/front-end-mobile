@@ -10,6 +10,8 @@ class LessorAdminApge extends StatefulWidget {
 class _LessorAdminApgeState extends State<LessorAdminApge> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(child: Text("We are working hard")),
+    );
   }
 }

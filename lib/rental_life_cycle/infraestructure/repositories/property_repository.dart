@@ -21,15 +21,11 @@ class PropertyRepository implements PropertyInterface {
   @override
   Future<void> saveProperty(Property property, String uid) async {
     PropertyModel propertyModel = PropertyModel(
-        property.description,
-        property.tittle,
-        property.currency,
-        property.conditions,
-        property.price,
-        property.assets,
-        property.propertyId,
-        property.rentalOfferId,
-        property.userProfile);
+      property.description,
+      property.tittle,
+      property.assets,
+      property.id,
+    );
     await _propertyDataSource.saveProperty(propertyModel, uid);
   }
 }

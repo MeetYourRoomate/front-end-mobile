@@ -8,7 +8,7 @@ class RentalOffer {
   final String? _conditions;
   final String? _status;
   final String? _visibility;
-  //final Property? _property;
+  final Property? _property;
   final UserProfile? _userProfile;
 
   RentalOffer(
@@ -19,6 +19,7 @@ class RentalOffer {
     this._status,
     this._visibility,
     this._userProfile,
+    this._property,
   );
 
   int? get id => _id;
@@ -27,6 +28,6 @@ class RentalOffer {
   String? get conditions => _conditions;
   String? get status => _status;
   String? get visibility => _visibility;
-  //Property? get property => _property;
+  Property? get property => _property;
   UserProfile? get userProfile => _userProfile;
 }

@@ -128,7 +128,7 @@ class _PropertyPhotosState extends State<PropertyPhotos> {
               final storaef = storage.child(imagePath);
               await storaef.putFile(propertyProvider.selectedImage[i]!);
               final imageUrl = await storage.child(imagePath).getDownloadURL();
-              property_asset.add(PropertyAsset(imageUrl));
+              property_asset.add(PropertyAsset(imageUrl, null));
               print("Enviando objetos$i");
             }
           }
