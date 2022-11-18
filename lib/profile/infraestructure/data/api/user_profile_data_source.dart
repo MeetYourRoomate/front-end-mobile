@@ -19,6 +19,8 @@ class UserProfileDataSource {
     if (response.statusCode == 200) {
       // ignore: avoid_print
       print(UserProfileModel.fromJson(jsonDecode(response.body)));
+    } else if (response.statusCode == 409) {
+      print(response.body);
     } else {
       throw Exception("fallo la llamada");
     }

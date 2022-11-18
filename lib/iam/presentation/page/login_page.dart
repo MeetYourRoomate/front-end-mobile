@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
 import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
@@ -158,8 +159,10 @@ class _LoginPageState extends State<LoginPage> {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: ColorsApp.primaryColor2,
+                              ),
                             );
                           },
                         );
