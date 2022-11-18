@@ -48,9 +48,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const CircleProfileAvatar(
-                          image:
-                              "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/09/elon-musk-2829389.jpg",
+                        CircleProfileAvatar(
+                          image: FirebaseAuth.instance.currentUser!.photoURL!,
                         ),
                         const SizedBox(
                           height: 10,

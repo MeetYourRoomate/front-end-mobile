@@ -37,7 +37,12 @@ class _RoomieMatchingPageState extends State<RoomieMatchingPage> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Expanded(child: UserMatchingWidget(images: images))
+          SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            child: UserMatchingWidget(images: images),
+          )
         ],
       ),
     );

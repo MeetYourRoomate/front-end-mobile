@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_admin_page.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_home_page.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/lessor/lessor_menu_page.dart';
@@ -26,26 +27,26 @@ class _LessorMainPageState extends State<LessorMainPage> {
       body: pages[_index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _index,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.orange,
+            backgroundColor: ColorsApp.primaryColor2,
             icon: Icon(Icons.home),
             label: "Home",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.orange,
+            backgroundColor: ColorsApp.primaryColor2,
             icon: Icon(Icons.message),
             label: "message",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.orange,
+            backgroundColor: ColorsApp.primaryColor2,
             icon: Icon(
               Icons.admin_panel_settings,
             ),
             label: "admin",
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.orange,
+            backgroundColor: ColorsApp.primaryColor2,
             icon: Icon(Icons.menu),
             label: "menu",
           ),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/pages/lessor/lessor_main_page.dart';
 import 'package:meet_your_roommate_app/common/pages/student/main_page.dart';
 import 'package:meet_your_roommate_app/fast_test.dart';
 import 'package:meet_your_roommate_app/iam/presentation/page/authentication_controller.dart';

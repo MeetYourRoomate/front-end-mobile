@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class CircleProfileAvatar extends StatelessWidget {
   final String image;
-  const CircleProfileAvatar({super.key, required this.image});
+  final double radius;
+  const CircleProfileAvatar({super.key, required this.image, this.radius = 50});
 
   @override
   Widget build(BuildContext context) {
     bool verified = (image != "") ? true : false;
     return CircleAvatar(
-      radius: 50,
+      radius: radius,
       backgroundColor: Colors.black12,
       backgroundImage: verified
           ? NetworkImage(image)

@@ -3,6 +3,7 @@ import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
 import 'package:meet_your_roommate_app/roommate_coexistance/presentation/page/roomie_matching_page.dart';
+import 'package:meet_your_roommate_app/roommate_coexistance/presentation/page/user_group_page.dart';
 
 import 'package:provider/provider.dart';
 
@@ -40,22 +41,28 @@ class _RoomiePageState extends State<RoomiePage> {
                     unselectedLabelColor: Colors.black,
                     tabs: const [
                       Tab(
-                        icon: Icon(Icons.people),
-                      ),
-                      Tab(
-                        text: "Rented",
+                        icon: Icon(
+                          Icons.person_search,
+                          size: 35,
+                        ),
                       ),
                       Tab(
                         text: "Matches",
+                      ),
+                      Tab(
+                        icon: Icon(
+                          Icons.people_outline_sharp,
+                          size: 35,
+                        ),
                       ),
                     ],
                   ),
                   Expanded(
                     child: TabBarView(
                       children: [
-                        RoomieMatchingPage(),
+                        const RoomieMatchingPage(),
                         Container(),
-                        Container(),
+                        const UserGroupPage(),
                       ],
                     ),
                   )
