@@ -28,14 +28,18 @@ class UserProfileRepository implements UserProfileInterface {
   @override
   Future<void> saveUserProfile(UserProfile userProfile, String uid) async {
     UserProfileModel userProfileModel = UserProfileModel(
+      userProfile.id,
       userProfile.name,
-      userProfile.photoUrl,
       userProfile.surname,
+      userProfile.photoUrl,
+      userProfile.gender,
+      userProfile.about,
+      userProfile.teamStatus,
+      userProfile.country,
+      userProfile.city,
+      userProfile.age,
       userProfile.phoneNumber,
       userProfile.phoneCode,
-      userProfile.description,
-      userProfile.teamStatus,
-      userProfile.id,
     );
     await _userProfileDataSource.saveUserProfile(userProfileModel, uid);
   }

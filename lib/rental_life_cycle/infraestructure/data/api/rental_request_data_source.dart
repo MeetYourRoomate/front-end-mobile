@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:meet_your_roommate_app/common/config/path.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/rental_request_model.dart';
 
 class RentalRequestDataSource {
   Future<void> saveRentalRequest(RentalRequestModel rentalRequestModel) async {
     final response = await post(
-      Uri.parse(
-          "https://meetyouroommate-backend.herokuapp.com/api/v1/rental/request"),
+      Uri.parse("$baseUrl/rental/request"),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },

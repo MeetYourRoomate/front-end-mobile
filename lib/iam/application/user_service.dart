@@ -2,10 +2,12 @@ import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
 import 'package:meet_your_roommate_app/iam/infraestructure/repositories/user_repository.dart';
 
 class UserService {
-  final UserRepository _userRepository = UserRepository();
+  final UserRepository _userRepository;
 
-  Future<UserAuth> getUser() async {
-    return _userRepository.getUser();
+  UserService(this._userRepository);
+
+  Future<UserAuth> getUserById(String uid) async {
+    return _userRepository.getUserById(uid);
   }
 
   Future<UserAuth> saveUser(UserAuth user) async {

@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:meet_your_roommate_app/iam/presentation/page/create_profile_page.dart';
+import 'package:validators/validators.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -9,6 +13,50 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  Future signUp() async {
+    if (isValidEmail && validPassword()) {
+      List a = await FirebaseAuth.instance
+          .fetchSignInMethodsForEmail(_emailController.text.trim());
+      if (a.isEmpty) {
+        errCorreo = "";
+      } else {
+        setState(() {
+          errCorreo = "Email already exists";
+        });
+      }
+    } else {
+      setState(() {
+        errCorreo = "Password or Email Incorrect";
+      });
+    }
+  }
+
+  bool validPassword() {
+    if (_passwordController.text.isNotEmpty &&
+        _passwordController.text.trim() ==
+            _confirmPasswordController.text.trim()) {
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  bool isValidEmail = false;
+
+  String errCorreo = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +124,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 30.0, bottom: 2.0),
+                                child: Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(
+                                    errCorreo,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16.0,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
                               const Text(
                                 "Email",
                                 style: TextStyle(
@@ -83,7 +146,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              TextFormField(),
+                              TextFormField(
+                                  controller: _emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: const InputDecoration(
+                                    hintText: "Email",
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black38,
+                                    ),
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isValidEmail = isEmail(value);
+                                    });
+                                  }),
                               const SizedBox(
                                 height: 20.0,
                               ),
@@ -94,7 +171,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              TextFormField(),
+                              TextFormField(
+                                controller: _passwordController,
+                                keyboardType: TextInputType.text,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  hintText: "Password",
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black38,
+                                  ),
+                                ),
+                              ),
                               const SizedBox(
                                 height: 20.0,
                               ),
@@ -105,27 +193,53 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              TextFormField(),
+                              TextFormField(
+                                controller: _confirmPasswordController,
+                                keyboardType: TextInputType.text,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  hintText: "Password",
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black38,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Container(
-                          height: 45.0,
-                          width: 200.0,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff66030E),
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "Register",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20.0,
+                        InkWell(
+                          onTap: () {
+                            signUp();
+                            if (errCorreo.isEmpty) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CreateProfilePage(
+                                            email: _emailController.text.trim(),
+                                            password:
+                                                _passwordController.text.trim(),
+                                          )));
+                            }
+                          },
+                          child: Container(
+                            height: 45.0,
+                            width: 200.0,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff66030E),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Register",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
                           ),

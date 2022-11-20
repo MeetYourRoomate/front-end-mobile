@@ -1,10 +1,9 @@
-import 'dart:ui';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/common/utils/colors.dart';
-import 'package:meet_your_roommate_app/iam/user_provider.dart';
+
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
+import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
+
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/type_property.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +17,7 @@ class LessorHomePage extends StatefulWidget {
 class _LessorHomePageState extends State<LessorHomePage> {
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProfileProvider = Provider.of<UserProfileProvider>(context);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -30,7 +29,7 @@ class _LessorHomePageState extends State<LessorHomePage> {
               child: Row(
                 children: [
                   CircleProfileAvatar(
-                    image: FirebaseAuth.instance.currentUser!.photoURL!,
+                    image: userProfileProvider.photoUrl,
                     radius: 35,
                   ),
                   const SizedBox(
@@ -50,7 +49,7 @@ class _LessorHomePageState extends State<LessorHomePage> {
                         height: 5,
                       ),
                       Text(
-                        FirebaseAuth.instance.currentUser!.displayName!,
+                        userProfileProvider.name,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,

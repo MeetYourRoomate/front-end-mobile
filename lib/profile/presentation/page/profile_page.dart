@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
@@ -26,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    userService = UserService();
+    //userService = UserService();
     authService = AuthService();
     super.initState();
   }
@@ -49,13 +47,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CircleProfileAvatar(
-                          image: FirebaseAuth.instance.currentUser!.photoURL!,
+                          image: userProfileProvider.photoUrl,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          userProfileProvider.name!,
+                          userProfileProvider.name,
                           style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w600,

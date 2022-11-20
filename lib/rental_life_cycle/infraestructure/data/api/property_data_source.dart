@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:meet_your_roommate_app/common/config/path.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_model.dart';
 
 class PropertyDataSource {
@@ -8,7 +9,7 @@ class PropertyDataSource {
 
     final response = await post(
         Uri.parse(
-          "https://meetyouroommate-backend.herokuapp.com/api/v1/users/$uid/rental/offer",
+          "$baseUrl/users/$uid/rental/offer",
         ),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -24,8 +25,7 @@ class PropertyDataSource {
 
   Future<List<PropertyModel>> getProperties() async {
     final response = await get(
-      Uri.parse(
-          "https://meetyouroommate-backend.herokuapp.com//api/v1/rentaloffers/all"),
+      Uri.parse("$baseUrl/rentaloffers/all"),
     );
 
     if (response.statusCode == 200) {

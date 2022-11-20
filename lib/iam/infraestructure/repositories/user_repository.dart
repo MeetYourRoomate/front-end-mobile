@@ -4,11 +4,13 @@ import 'package:meet_your_roommate_app/iam/infraestructure/data/api/user_data_so
 import 'package:meet_your_roommate_app/iam/infraestructure/models/user_model.dart';
 
 class UserRepository implements UserInterface {
-  final UserDataSource _userDataSource = UserDataSource();
+  final UserDataSource _userDataSource;
+
+  UserRepository(this._userDataSource);
 
   @override
-  Future<UserAuth> getUser() async {
-    final UserAuth user = await _userDataSource.getUser();
+  Future<UserAuth> getUserById(String uid) async {
+    final UserAuth user = await _userDataSource.getUserById(uid);
     return user;
   }
 

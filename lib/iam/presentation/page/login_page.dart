@@ -1,13 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
 import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/authentication_controller.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 
 import 'package:provider/provider.dart';
+import 'package:validators/validators.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -18,34 +21,48 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   late UserService userService;
   late AuthService authService;
   late UserProfileService userProfileService;
 
+  Future signIn() async {
+    List a = await FirebaseAuth.instance
+        .fetchSignInMethodsForEmail(_emailController.text.trim());
+    if (a.isEmpty) {
+      setState(() {
+        error = "Email or Password invalid";
+      });
+    } else {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+    }
+  }
+
   @override
   void initState() {
-    userService = UserService();
+    //userService = UserService();
     authService = AuthService();
     userProfileService = UserProfileService();
     super.initState();
   }
 
+  String error = "";
+
+  bool isValidEmail = false;
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                  "http://contempo.com.pe/files/1/page-contents/shutterstock_568241401-1.jpg"),
-              fit: BoxFit.cover,
-            ),
-          ),
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
           child: Column(
             verticalDirection: VerticalDirection.up,
             children: [
@@ -93,7 +110,21 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          TextFormField(),
+                          TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: const InputDecoration(
+                                hintText: "Email",
+                                hintStyle: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black38,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  isValidEmail = isEmail(value);
+                                });
+                              }),
                           const SizedBox(
                             height: 20.0,
                           ),
@@ -104,7 +135,18 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          TextFormField(),
+                          TextFormField(
+                            controller: _passwordController,
+                            keyboardType: TextInputType.text,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              hintText: "Password",
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black38,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -119,7 +161,24 @@ class _LoginPageState extends State<LoginPage> {
                       height: 25.0,
                     ),
                     InkWell(
-                      onTap: () async {},
+                      onTap: () async {
+                        final navigator = Navigator.of(context);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: ColorsApp.primaryColor2,
+                              ),
+                            );
+                          },
+                        );
+                        await signIn();
+                        navigator.pop();
+                        navigator.push(MaterialPageRoute(
+                            builder: (context) =>
+                                const AuthenticationController()));
+                      },
                       child: Container(
                         height: 45.0,
                         width: 200.0,
@@ -168,27 +227,27 @@ class _LoginPageState extends State<LoginPage> {
                         );
                         final user = await authService.signInWithGoogle();
                         if (user != null) {
-                          UserAuth userAuth =
-                              UserAuth(user.uid, user.email, null, null);
-                          final saverUser =
-                              await userService.saveUser(userAuth);
-                          // ignore: avoid_print
-                          print(saverUser);
-                          UserProfile userProfile = UserProfile(
-                            user.displayName,
-                            user.photoURL,
-                            "",
-                            user.phoneNumber,
-                            "",
-                            "",
-                            "",
-                            null,
-                          );
+                          await userService.saveUser(
+                              UserAuth(user.uid, user.email, null, null));
                           await userProfileService.saveUserProfile(
-                              userProfile, user.uid);
+                              UserProfile(
+                                null,
+                                user.displayName,
+                                "xxxxxx",
+                                user.photoURL,
+                                "xxxxx",
+                                "",
+                                "",
+                                "xxxxxx",
+                                "xxxxxx",
+                                0,
+                                "xxxxxxxxx",
+                                "+51",
+                              ),
+                              user.uid);
+                          navigator.pop();
                         }
                         userProvider.setIsLogged(isLogged: true);
-                        navigator.pop();
                       },
                       child: Container(
                         height: 35.0,

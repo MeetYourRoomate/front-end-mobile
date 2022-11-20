@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:meet_your_roommate_app/roommate_coexistance/presentation/widget/user_matching_widget.dart';
+import 'package:meet_your_roommate_app/user_matching/presentation/widget/user_matching_widget.dart';
 
 class RoomieMatchingPage extends StatefulWidget {
   const RoomieMatchingPage({super.key});

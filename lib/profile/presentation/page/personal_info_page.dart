@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
 import 'package:provider/provider.dart';

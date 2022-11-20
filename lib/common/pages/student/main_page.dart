@@ -71,16 +71,6 @@ class _MainPageStudentState extends State<MainPageStudent> {
           ),
         ],
         onTap: ((value) async {
-          switch (value) {
-            case 4:
-              if (userProfileProvider.id == -1) {
-                UserProfile userProfile =
-                    await userProfileService.getUserProfileByUserId(
-                        FirebaseAuth.instance.currentUser!.uid);
-                userProfileProvider.setUserProfileProvider(userProfile);
-              }
-              break;
-          }
           setState(() {
             _index = value;
           });

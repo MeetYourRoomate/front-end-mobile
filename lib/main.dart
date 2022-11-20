@@ -4,14 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/common/pages/lessor/lessor_main_page.dart';
 import 'package:meet_your_roommate_app/common/pages/student/main_page.dart';
 import 'package:meet_your_roommate_app/fast_test.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/auth_page.dart';
 import 'package:meet_your_roommate_app/iam/presentation/page/authentication_controller.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/register_page.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/create_profile_page.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initIjectable();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -37,9 +42,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.yellow,
+          primarySwatch: Colors.blue,
         ),
-        home: const AuthenticationController(),
+        home: const FatTest(),
       ),
     );
   }

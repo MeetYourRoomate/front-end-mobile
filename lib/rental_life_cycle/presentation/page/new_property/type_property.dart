@@ -92,8 +92,11 @@ class _TypePropertyPageState extends State<TypePropertyPage> {
                         ? InkWell(
                             onTap: () async {
                               Property property = Property(
-                                propertyProvider.description,
+                                null,
                                 propertyProvider.title,
+                                propertyProvider.description,
+                                null,
+                                null,
                                 null,
                                 null,
                               );
@@ -112,7 +115,7 @@ class _TypePropertyPageState extends State<TypePropertyPage> {
                               ),
                             ),
                           )
-                        : Icon(Icons.arrow_forward_ios),
+                        : const Icon(Icons.arrow_forward_ios),
                   ),
                 ],
               ),

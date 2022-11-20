@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:meet_your_roommate_app/common/config/path.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_asset_model.dart';
 
 class PropertyAssetDataSource {
@@ -12,8 +13,7 @@ class PropertyAssetDataSource {
     }
     print(bodyData);
     final response = await post(
-      Uri.parse(
-          "https://meetyouroommate-backend.herokuapp.com/api/v1/property/$id/assets"),
+      Uri.parse("$baseUrl/property/$id/assets"),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
