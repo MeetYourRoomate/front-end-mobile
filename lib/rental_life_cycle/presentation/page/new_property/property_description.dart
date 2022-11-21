@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/property_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,13 +14,7 @@ class PropertyDescription extends StatefulWidget {
 class _PropertyDescriptionState extends State<PropertyDescription> {
   final _descriptionController = TextEditingController();
 
-  late PropertyService propertyService;
-
-  @override
-  void initState() {
-    propertyService = PropertyService();
-    super.initState();
-  }
+  final PropertyService propertyService = locator<PropertyService>();
 
   @override
   void dispose() {

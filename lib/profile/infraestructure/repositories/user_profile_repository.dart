@@ -4,7 +4,9 @@ import 'package:meet_your_roommate_app/profile/infraestructure/data/api/user_pro
 import 'package:meet_your_roommate_app/profile/infraestructure/models/user_profile_model.dart';
 
 class UserProfileRepository implements UserProfileInterface {
-  final UserProfileDataSource _userProfileDataSource = UserProfileDataSource();
+  final UserProfileDataSource _userProfileDataSource;
+
+  UserProfileRepository(this._userProfileDataSource);
 
   @override
   Future<List<UserProfile>> getAllUsersProfiles() {

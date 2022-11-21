@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 import 'package:meet_your_roommate_app/profile/presentation/page/profile_page.dart';
@@ -19,7 +20,7 @@ class MainPageStudent extends StatefulWidget {
 }
 
 class _MainPageStudentState extends State<MainPageStudent> {
-  late UserProfileService userProfileService;
+  final UserProfileService userProfileService = locator<UserProfileService>();
   int _index = 0;
   final pages = [
     const HomePageStudent(),
@@ -28,12 +29,6 @@ class _MainPageStudentState extends State<MainPageStudent> {
     const RoomiePage(),
     const ProfilePage(),
   ];
-
-  @override
-  void initState() {
-    userProfileService = UserProfileService();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

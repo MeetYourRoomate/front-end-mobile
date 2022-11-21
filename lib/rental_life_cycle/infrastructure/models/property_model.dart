@@ -1,6 +1,6 @@
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_asset_model.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_feature_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_asset_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_feature_model.dart';
 
 class PropertyModel extends Property {
   PropertyModel(

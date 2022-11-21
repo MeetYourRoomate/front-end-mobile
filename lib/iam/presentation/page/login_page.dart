@@ -6,6 +6,7 @@ import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
 import 'package:meet_your_roommate_app/iam/presentation/page/authentication_controller.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 
@@ -24,9 +25,10 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  late UserService userService;
   late AuthService authService;
-  late UserProfileService userProfileService;
+  final UserService userService = locator<UserService>();
+
+  final UserProfileService userProfileService = locator<UserProfileService>();
 
   Future signIn() async {
     List a = await FirebaseAuth.instance
@@ -44,9 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    //userService = UserService();
     authService = AuthService();
-    userProfileService = UserProfileService();
     super.initState();
   }
 

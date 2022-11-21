@@ -26,9 +26,7 @@ class UserProfileDataSource {
       body: bodyData,
     );
     if (response.statusCode == 200) {
-      // ignore: avoid_print
       return UserProfileModel.fromJson(jsonDecode(response.body)["resource"]);
-      print(response.body);
     } else {
       throw Exception("fallo la llamada");
     }

@@ -1,6 +1,6 @@
 import 'package:meet_your_roommate_app/profile/infraestructure/models/user_profile_model.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_model.dart';
 
 class RentalOfferModel extends RentalOffer {
   RentalOfferModel(

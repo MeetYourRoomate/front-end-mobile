@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_offer_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/student/property_page.dart';
@@ -12,7 +13,7 @@ class HomePageStudent extends StatefulWidget {
 }
 
 class _HomePageStudentState extends State<HomePageStudent> {
-  late RentalOfferService _rentalOfferService = RentalOfferService();
+  final RentalOfferService _rentalOfferService = locator<RentalOfferService>();
   List<RentalOffer> listRentalOffer = [];
 
   Future fetchRentalOffer() async {
@@ -28,7 +29,6 @@ class _HomePageStudentState extends State<HomePageStudent> {
 
   @override
   void initState() {
-    _rentalOfferService = RentalOfferService();
     fetchRentalOffer();
     super.initState();
   }

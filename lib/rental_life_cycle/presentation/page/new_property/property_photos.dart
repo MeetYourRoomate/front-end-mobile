@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/property_asset_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_asset.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
@@ -19,15 +20,10 @@ class _PropertyPhotosState extends State<PropertyPhotos> {
   final ImagePicker _imagePicker = ImagePicker();
   List<File?> selectedImage = [];
   final storage = FirebaseStorage.instance.ref();
-  late PropertyAssetService propertyAssetService;
+  final PropertyAssetService propertyAssetService =
+      locator<PropertyAssetService>();
   List<PropertyAsset> property_asset = [];
   bool hasImage = false;
-
-  @override
-  void initState() {
-    propertyAssetService = PropertyAssetService();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

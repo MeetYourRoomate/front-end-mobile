@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
-import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 
 class UserProfileProvider with ChangeNotifier {
   int _id = -1;
@@ -22,7 +22,7 @@ class UserProfileProvider with ChangeNotifier {
   String get teamStatus => _teamStatus;
 
   Future<void> setUserProfileProvider(String uid) async {
-    UserProfileService userProfileService = UserProfileService();
+    UserProfileService userProfileService = locator<UserProfileService>();
 
     final data = await userProfileService.getUserProfileByUserId(uid);
     _id = data.id!;

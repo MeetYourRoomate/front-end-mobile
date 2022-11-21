@@ -6,8 +6,8 @@ import 'package:meet_your_roommate_app/iam/infraestructure/models/user_model.dar
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/infraestructure/data/api/user_profile_data_source.dart';
 import 'package:meet_your_roommate_app/profile/infraestructure/models/user_profile_model.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/data/api/rental_offer_data_source.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/rental_offer_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/rental_offer_data_source.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/rental_offer_model.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/image_carousel.dart';
 
 class FatTest extends StatefulWidget {

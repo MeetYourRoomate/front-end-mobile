@@ -4,6 +4,7 @@ import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/country.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
@@ -46,23 +47,14 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
   String age = "";
   String number = "";
 
-  late UserProfileService _userProfileService;
-  late UserService userService;
+  final UserProfileService _userProfileService = locator<UserProfileService>();
+  final UserService userService = locator<UserService>();
 
   Future signUp() async {
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: widget.email, password: widget.password);
     await userService.saveUser(UserAuth(
         FirebaseAuth.instance.currentUser!.uid, widget.email, null, null));
-  }
-
-  @override
-  void initState() {
-    _userProfileService = UserProfileService();
-
-    //userService = UserService();
-
-    super.initState();
   }
 
   @override

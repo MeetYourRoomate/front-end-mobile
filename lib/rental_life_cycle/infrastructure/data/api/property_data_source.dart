@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:meet_your_roommate_app/common/config/path.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_model.dart';
 
 class PropertyDataSource {
   Future<void> saveProperty(PropertyModel propertyModel, String uid) async {

@@ -1,0 +1,104 @@
+[
+    {
+        "success": true,
+        "message": "string",
+        "resource": {
+          "id": 0,
+          "studentRequestor": {
+            "id": 0,
+            "age": 0,
+            "name": "string",
+            "surname": "string",
+            "photoUrl": "string",
+            "gender": "string",
+            "about": "string",
+            "country": "string",
+            "city": "string",
+            "teamStatus": "ONTEAM",
+            "phone": {
+              "number": "string",
+              "code": "string"
+            },
+            "atributesSet": [
+              {
+                "id": "string",
+                "name": "string",
+                "value": "string",
+                "type": "string",
+                "profiles": [
+                  "string"
+                ],
+                "audit": {
+                  "createdAt": "2022-11-20T22:25:38.143Z",
+                  "updatedAt": "2022-11-20T22:25:38.143Z"
+                }
+              }
+            ]
+          },
+          "studentRequested": {
+            "id": 0,
+            "age": 0,
+            "name": "string",
+            "surname": "string",
+            "photoUrl": "string",
+            "gender": "string",
+            "about": "string",
+            "country": "string",
+            "city": "string",
+            "teamStatus": "ONTEAM",
+            "phone": {
+              "number": "string",
+              "code": "string"
+            },
+            "atributesSet": [
+              {
+                "id": "string",
+                "name": "string",
+                "value": "string",
+                "type": "string",
+                "profiles": [
+                  "string"
+                ],
+                "audit": {
+                  "createdAt": "2022-11-20T22:25:38.143Z",
+                  "updatedAt": "2022-11-20T22:25:38.143Z"
+                }
+              }
+            ]
+          },
+          "status": "PENDING"
+        }
+      },
+      {
+        "success": true,
+        "message": "string",
+        "resource": {
+          "id": 0,
+          "name": "string",
+          "surname": "string",
+          "photoUrl": "string",
+          "gender": "string",
+          "about": "string",
+          "teamStatus": "ONTEAM",
+          "country": "string",
+          "city": "string",
+          "age": 0,
+          "phone": {
+            "number": "string",
+            "code": "string"
+          },
+          "createdAt": "2022-11-20T22:56:21.555Z",
+          "atributes": [
+            {
+              "id": "string",
+              "name": "string",
+              "value": "string",
+              "type": "string"
+            }
+          ]
+        }
+      }
+      ,{
+        "pasword":"46638869"
+      }
+]

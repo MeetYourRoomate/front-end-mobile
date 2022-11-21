@@ -1,10 +1,12 @@
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_asset.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/interface/property_asset_interface.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/data/api/property_asset_data_source.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_asset_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/property_asset_data_source.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_asset_model.dart';
 
 class PropertyAssetRepository implements PropertyAssetInterface {
-  final PropertyAssetDataSource _assetDataSource = PropertyAssetDataSource();
+  final PropertyAssetDataSource _assetDataSource;
+
+  PropertyAssetRepository(this._assetDataSource);
 
   @override
   Future<List<PropertyAsset>> getProperties() {

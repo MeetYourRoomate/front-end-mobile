@@ -1,5 +1,5 @@
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_feature.dart';
-import 'package:meet_your_roommate_app/rental_life_cycle/infraestructure/models/property_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_model.dart';
 
 class PropertyFeatureModel extends PropertyFeature {
   PropertyFeatureModel(
