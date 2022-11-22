@@ -1,2 +1,1 @@
-String baseUrl =
-    "http://meetyourroommate.eastus.cloudapp.azure.com:8091/api/v1";
+String baseUrl = "https://meetyouroommate-backend.herokuapp.com/api/v1";

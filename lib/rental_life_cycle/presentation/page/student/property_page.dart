@@ -62,27 +62,11 @@ class _PropertyPageState extends State<PropertyPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  bool find = false;
+  bool find = true;
   void validProperty(List<RentalRequest> listRental, id) {}
   String message = "";
   @override
   Widget build(BuildContext context) {
-    final requestProvider = Provider.of<PropertyRequestProvider>(context);
-
-    if (requestProvider.listRequestStudent.isNotEmpty) {
-      for (int i = 0; i < requestProvider.listRequestStudent.length; i++) {
-        if (requestProvider.listRequestStudent[i].rentalOffer!.id ==
-            widget.rentalOffer.id) {
-          setState(() {
-            find = true;
-          });
-        } else {
-          setState(() {
-            find = false;
-          });
-        }
-      }
-    }
     final data = widget.rentalOffer.property!.assets;
     final dataService = widget.rentalOffer.property!.features;
 
@@ -383,6 +367,17 @@ class _PropertyPageState extends State<PropertyPage> {
                     actions: [
                       InkWell(
                         onTap: () async {
+                          final navigator = Navigator.of(context);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: ColorsApp.primaryColor2,
+                                ),
+                              );
+                            },
+                          );
                           if (FirebaseAuth.instance.currentUser != null) {
                             await rentalRequestService.saveRentalRequest(
                                 RentalRequest(
@@ -394,6 +389,7 @@ class _PropertyPageState extends State<PropertyPage> {
                                     FirebaseAuth.instance.currentUser!.uid,
                                     widget.rentalOffer.id));
                           }
+                          navigator.pop();
                           back();
                         },
                         child: Container(
