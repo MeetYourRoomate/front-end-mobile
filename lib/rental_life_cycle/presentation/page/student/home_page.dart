@@ -18,6 +18,7 @@ class _HomePageStudentState extends State<HomePageStudent> {
 
   Future fetchRentalOffer() async {
     final data = await _rentalOfferService.getVisibleRentalOffer();
+
     if (mounted) {
       setState(() {
         listRentalOffer = data;
@@ -105,10 +106,15 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
                                           listRentalOffer[index]
-                                              .property!
-                                              .assets!
-                                              .first
-                                              .imageUrl!,
+                                                  .property!
+                                                  .assets!
+                                                  .isNotEmpty
+                                              ? listRentalOffer[index]
+                                                  .property!
+                                                  .assets!
+                                                  .first
+                                                  .imageUrl!
+                                              : "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/common%2FdefaultImage.jpeg?alt=media&token=d428210c-db58-4f65-b801-05605fea18d6",
                                         ),
                                       ),
                                     ),
@@ -139,10 +145,12 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Expanded(
+                                        Expanded(
                                           child: Text(
-                                            "Alquilo Departamento para estudiantes",
-                                            style: TextStyle(
+                                            listRentalOffer[index]
+                                                .property!
+                                                .tittle!,
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16.0,
                                             ),

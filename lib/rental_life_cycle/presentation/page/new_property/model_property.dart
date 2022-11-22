@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/close_created_property_widget.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/type_property_widget.dart';
 
 class ModelPropertyScreen extends StatefulWidget {
   const ModelPropertyScreen({super.key});
@@ -9,6 +12,18 @@ class ModelPropertyScreen extends StatefulWidget {
 
 class _ModelPropertyScreenState extends State<ModelPropertyScreen> {
   bool isSelected = false;
+  List type = [
+    "House",
+    "Condominio",
+    "Building",
+    "apartment",
+  ];
+  List text = [
+    "a building in which people meet for a particular activity.",
+    "a building or complex of buildings containing a number of individually owned apartments or houses",
+    "a structure with a roof and walls, such as a house, school, store, or factory.",
+    "a suite of rooms forming one residence, typically in a building containing a number of these",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +31,7 @@ class _ModelPropertyScreenState extends State<ModelPropertyScreen> {
       body: Column(
         children: [
           Container(
-            color: Colors.orange.shade400,
+            color: ColorsApp.primaryColor2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -25,9 +40,17 @@ class _ModelPropertyScreenState extends State<ModelPropertyScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Icon(Icons.close),
-                      Text("Complete"),
-                      Icon(Icons.help),
+                      CloseCreatePropertyWidget(),
+                      Text(
+                        "Type of Propertry",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(
+                        Icons.help,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                 ),
@@ -37,6 +60,7 @@ class _ModelPropertyScreenState extends State<ModelPropertyScreen> {
                   child: Text(
                     "Que tipo de inmueble es la propiedad?",
                     style: TextStyle(
+                      color: Colors.white,
                       fontSize: 30.0,
                       fontWeight: FontWeight.w600,
                     ),
@@ -45,54 +69,17 @@ class _ModelPropertyScreenState extends State<ModelPropertyScreen> {
               ],
             ),
           ),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      isSelected = !isSelected;
-                    });
-                  },
-                  child: Container(
-                    height: 120.0,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: isSelected ? 2.0 : 1.0,
-                        color: isSelected ? Colors.black : Colors.black12,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "Vivienda Rentada",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            "Espacio creado dentro de un edificio o compleko residencial de varias viviendas",
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          Expanded(
+              child: ListView.builder(
+            itemCount: type.length,
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(12),
+                child: TypePropertyWidget(
+                    name: type[index], description: text[index]),
+              );
+            }),
+          ))
         ],
       ),
     );

@@ -19,7 +19,7 @@ class _UserControllerState extends State<UserController> {
     return Scaffold(
       body: Builder(
         builder: (context) {
-          if (userProvider.userStatus == "user") {
+          if (userProvider.userStatus == "ROLE_USER_STUDENT") {
             return const MainPageStudent();
           } else {
             return const LessorMainPage();

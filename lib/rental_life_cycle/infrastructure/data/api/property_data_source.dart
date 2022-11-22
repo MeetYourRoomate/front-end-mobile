@@ -4,12 +4,13 @@ import 'package:meet_your_roommate_app/common/config/path.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/property_model.dart';
 
 class PropertyDataSource {
-  Future<void> saveProperty(PropertyModel propertyModel, String uid) async {
+  Future<PropertyModel> saveProperty(
+      PropertyModel propertyModel, String uid) async {
     final bodyData = jsonEncode(propertyModel.toJson());
 
     final response = await post(
         Uri.parse(
-          "$baseUrl/users/$uid/rental/offer",
+          "$baseUrl/properties?userid=$uid",
         ),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -17,6 +18,7 @@ class PropertyDataSource {
         body: bodyData);
     if (response.statusCode == 200) {
       print(response.body);
+      return PropertyModel.fromJson(jsonDecode(response.body)["resource"]);
     } else {
       print(response.body);
       throw Exception("fallo la llamada");

@@ -4,10 +4,13 @@ import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/country.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
+import 'package:meet_your_roommate_app/iam/presentation/page/authentication_controller.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
+import 'package:provider/provider.dart';
 
 class CreateProfilePage extends StatefulWidget {
   final String email;
@@ -51,10 +54,42 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
   final UserService userService = locator<UserService>();
 
   Future signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    print("Creando cuenta");
+    final data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: widget.email, password: widget.password);
-    await userService.saveUser(UserAuth(
-        FirebaseAuth.instance.currentUser!.uid, widget.email, null, null));
+
+    if (data.user!.email != null) {
+      await userService
+          .saveUser(UserAuth(data.user!.uid, widget.email, null, null));
+      await _userProfileService.saveUserProfile(
+          UserProfile(
+            null,
+            name,
+            surname,
+            "",
+            gender,
+            about,
+            "",
+            country,
+            city,
+            int.parse(age),
+            number,
+            code,
+          ),
+          FirebaseAuth.instance.currentUser!.uid);
+      print("Creando perfil");
+    } else {
+      setState(() {
+        error = "no se que paso";
+      });
+    }
+  }
+
+  void nextScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const AuthenticationController()));
   }
 
   @override
@@ -69,8 +104,11 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
     super.dispose();
   }
 
+  String error = "";
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -381,6 +419,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                     ],
                   ),
                 ),
+                Center(child: Text(error)),
               ],
             ),
           ),
@@ -391,27 +430,21 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
         height: 70,
         child: InkWell(
           onTap: () async {
-            await signUp();
-            if (FirebaseAuth.instance.currentUser != null) {
-              await _userProfileService.saveUserProfile(
-                  UserProfile(
-                    null,
-                    name,
-                    surname,
-                    "",
-                    gender,
-                    about,
-                    "",
-                    country,
-                    city,
-                    int.parse(age),
-                    number,
-                    code,
+            final navigator = Navigator.of(context);
+            showDialog(
+              context: context,
+              builder: (context) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: ColorsApp.primaryColor2,
                   ),
-                  FirebaseAuth.instance.currentUser!.uid);
-            } else {
-              return;
-            }
+                );
+              },
+            );
+            await signUp();
+            userProvider.setIsLogged(isLogged: true);
+            navigator.pop();
+            nextScreen();
           },
           child: Container(
             height: 60,

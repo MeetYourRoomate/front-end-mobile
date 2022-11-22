@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
 import 'package:meet_your_roommate_app/user_matching/presentation/widget/user_matching_widget.dart';
+import 'package:provider/provider.dart';
 
 class RoomieMatchingPage extends StatefulWidget {
   const RoomieMatchingPage({super.key});
@@ -22,6 +24,7 @@ class _RoomieMatchingPageState extends State<RoomieMatchingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProfileProvider = Provider.of<UserProfileProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -41,7 +44,10 @@ class _RoomieMatchingPageState extends State<RoomieMatchingPage> {
             height: 30,
           ),
           Expanded(
-            child: UserMatchingWidget(images: images),
+            child: UserMatchingWidget(
+              images: images,
+              profiles: userProfileProvider.listProfiles,
+            ),
           )
         ],
       ),

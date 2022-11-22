@@ -37,8 +37,30 @@ class UserProfileDataSource {
     if (response.statusCode == 200) {
       print(response.body);
       return UserProfileModel.fromJson(jsonDecode(response.body)["resource"]);
+    } else if (response.statusCode == 404) {
+      UserProfileModel user =
+          UserProfileModel(-1, "", "", "", "", "", "", "", "", 0, "", "");
+      return user;
     } else {
+      print(response.body);
       throw Exception("Call Failed");
+    }
+  }
+
+  Future<List<UserProfileModel>> getAllUsersProfiles() async {
+    final response = await get(Uri.parse("$baseUrl/profiles"));
+
+    if (response.statusCode == 200) {
+      final parsed =
+          jsonDecode(response.body)["resource"].cast<Map<String, dynamic>>();
+
+      //print(jsonDecode(response.body)["resource"][0]);
+      List<UserProfileModel> lista = parsed
+          .map<UserProfileModel>((json) => UserProfileModel.fromJson(json))
+          .toList();
+      return lista;
+    } else {
+      throw "Error";
     }
   }
 }

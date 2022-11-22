@@ -5,6 +5,7 @@ import 'package:meet_your_roommate_app/iam/application/user_service.dart';
 import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
 import 'package:meet_your_roommate_app/iam/presentation/page/auth_page.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/presentation/page/personal_info_page.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
 import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
@@ -19,12 +20,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late UserService userService;
+  final UserService userService = locator<UserService>();
   late AuthService authService;
 
   @override
   void initState() {
-    //userService = UserService();
     authService = AuthService();
     super.initState();
   }
@@ -145,7 +145,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             UserAuth userAuth =
                                 await userService.updateUser(uid);
                           }
-                          userProvider.setUserStatus(userStatus: "lessor");
+                          userProvider.setUserStatus(
+                              userStatus: "ROLE_USER_LESSOR");
                         },
                         title: const Text(
                           "Manage your property",
@@ -273,6 +274,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         );
                         await authService.signOut();
                         userProvider.setIsLogged(isLogged: false);
+                        userProfileProvider.clear();
                         navigator.pop();
                       },
                       child: Container(

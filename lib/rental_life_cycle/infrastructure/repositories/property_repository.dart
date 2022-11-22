@@ -21,7 +21,7 @@ class PropertyRepository implements PropertyInterface {
   }
 
   @override
-  Future<void> saveProperty(Property property, String uid) async {
+  Future<Property> saveProperty(Property property, String uid) async {
     PropertyModel propertyModel = PropertyModel(
         property.id,
         property.tittle,
@@ -30,6 +30,6 @@ class PropertyRepository implements PropertyInterface {
         property.location,
         property.assets,
         property.features);
-    await _propertyDataSource.saveProperty(propertyModel, uid);
+    return await _propertyDataSource.saveProperty(propertyModel, uid);
   }
 }

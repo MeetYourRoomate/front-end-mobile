@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class UserProvider with ChangeNotifier {
   UserProvider(this._isLogged);
-  bool _isLogged = false;
+  bool _isLogged;
   String _userStatus = "ROLE_USER_STUDENT";
 
   bool get isLogged => _isLogged;

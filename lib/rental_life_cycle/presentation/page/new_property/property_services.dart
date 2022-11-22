@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/close_created_property_widget.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/property_service_widget.dart';
 
 class PropertyServices extends StatefulWidget {
   const PropertyServices({super.key});
@@ -15,7 +18,7 @@ class _PropertyServicesState extends State<PropertyServices> {
       body: Column(
         children: [
           Container(
-            color: Colors.orange.shade400,
+            color: ColorsApp.primaryColor2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -24,9 +27,17 @@ class _PropertyServicesState extends State<PropertyServices> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Icon(Icons.close),
-                      Text("Complete"),
-                      Icon(Icons.help),
+                      CloseCreatePropertyWidget(),
+                      Text(
+                        "Complete",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(
+                        Icons.help,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                 ),
@@ -37,6 +48,7 @@ class _PropertyServicesState extends State<PropertyServices> {
                     "Con que servicios cuenta su inmueble?",
                     style: TextStyle(
                       fontSize: 30.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -51,70 +63,46 @@ class _PropertyServicesState extends State<PropertyServices> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isSelected = !isSelected;
-                        });
-                      },
-                      child: Container(
-                        height: 120.0,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: isSelected ? 2.0 : 1.0,
-                            color: isSelected ? Colors.black : Colors.black12,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.wifi),
-                            Text(
-                              "Wi-Fi",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  children: const [
+                    PropertyServiceWidget(
+                      name: "Wi-Fi",
+                      icon: Icon(Icons.wifi),
                     ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isSelected = !isSelected;
-                        });
-                      },
-                      child: Container(
-                        height: 120.0,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: isSelected ? 2.0 : 1.0,
-                            color: isSelected ? Colors.black : Colors.black12,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.tv),
-                            Text(
-                              "TV",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    PropertyServiceWidget(
+                      name: "Kitchen",
+                      icon: Icon(Icons.kitchen),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const [
+                    PropertyServiceWidget(
+                      name: "Tv",
+                      icon: Icon(Icons.tv),
+                    ),
+                    PropertyServiceWidget(
+                      name: "Parking",
+                      icon: Icon(Icons.minor_crash_outlined),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const [
+                    PropertyServiceWidget(
+                      name: "Pool",
+                      icon: Icon(Icons.pool),
+                    ),
+                    PropertyServiceWidget(
+                      name: "Store",
+                      icon: Icon(Icons.store),
                     ),
                   ],
                 ),

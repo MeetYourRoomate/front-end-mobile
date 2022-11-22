@@ -2,22 +2,31 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_asset.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_feature.dart';
 
 class PropertyProvider with ChangeNotifier {
   String _tittle = "none";
   String _description = "none";
+  String _propertyType = "none";
+  String _location = "none";
   String _currency = "USD";
   String _conditions = "none";
-  int _price = 0;
+  double _price = 0;
   List<File?> _selectedImage = [];
-  List imagesPaths = [];
+  List<PropertyAsset> _assets = [];
+  List<PropertyFeature> _listFeature = [];
 
   String get title => _tittle;
   String get description => _description;
+  String get propertyType => _propertyType;
+  String get location => _location;
   String get currency => _currency;
   String get conditions => _conditions;
-  int get price => _price;
+  double get price => _price;
   List<File?> get selectedImage => _selectedImage;
+  List<PropertyFeature> get listFeature => _listFeature;
+  List<PropertyAsset> get assets => _assets;
 
   bool get countImages {
     if (_selectedImage.isEmpty) {
@@ -37,6 +46,21 @@ class PropertyProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> setFeature(PropertyFeature propertyFeature) async {
+    _listFeature.add(propertyFeature);
+    notifyListeners();
+  }
+
+  Future<void> popFeature(PropertyFeature propertyFeature) async {
+    _listFeature.removeWhere((element) => element.name == propertyFeature.name);
+    notifyListeners();
+  }
+
+  Future<void> setAsset(PropertyAsset propertyAsset) async {
+    _assets.add(propertyAsset);
+    notifyListeners();
+  }
+
   Future<void> setTitle(String title) async {
     _tittle = title;
     notifyListeners();
@@ -44,6 +68,16 @@ class PropertyProvider with ChangeNotifier {
 
   Future<void> setDescription(String description) async {
     _description = description;
+    notifyListeners();
+  }
+
+  Future<void> setLocation(String location) async {
+    _location = location;
+    notifyListeners();
+  }
+
+  Future<void> setPropertyType(String propertyType) async {
+    _propertyType = propertyType;
     notifyListeners();
   }
 
@@ -57,8 +91,21 @@ class PropertyProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setPrice(int price) async {
+  Future<void> setPrice(double price) async {
     _price = price;
     notifyListeners();
+  }
+
+  Future<void> clear() async {
+    _tittle = "none";
+    _description = "none";
+    _propertyType = "none";
+    _location = "none";
+    _currency = "USD";
+    _conditions = "none";
+    _price = 0;
+    _selectedImage = [];
+    _assets = [];
+    _listFeature = [];
   }
 }

@@ -13,16 +13,28 @@ class RentalRequestModel extends RentalRequest {
     super.rentalOfferId,
   );
   factory RentalRequestModel.fromJson(Map<String, dynamic> json) {
-    UserProfileModel userProfileModel =
-        UserProfileModel.fromJson(json["studentProfile"]);
-    RentalOfferModel rentalOfferModel =
-        RentalOfferModel.fromJson(json["rentalOffering"]);
+    UserProfileModel? userData() {
+      if (json["studentProfile"] != null) {
+        return UserProfileModel.fromJson(json["studentProfile"]);
+      } else {
+        return null;
+      }
+    }
+
+    RentalOfferModel? rentalData() {
+      if (json["rentalOffering"] != null) {
+        return RentalOfferModel.fromJson(json["rentalOffering"]);
+      } else {
+        return null;
+      }
+    }
+
     return RentalRequestModel(
       json["id"],
       json["status"],
       json["message"],
-      userProfileModel,
-      rentalOfferModel,
+      userData(),
+      rentalData(),
       null,
       null,
     );

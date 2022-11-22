@@ -9,4 +9,20 @@ class RentalRequestService {
   Future<void> saveRentalRequest(RentalRequest rentalRequest) async {
     await _rentalRequestRepository.saveRentalRequest(rentalRequest);
   }
+
+  Future<List<RentalRequest>> getRequestByUserId(String uid) async {
+    return await _rentalRequestRepository.getRentalRequestsByUserId(uid);
+  }
+
+  Future<List<RentalRequest>> getRentalRequestsByLessorId(String uid) async {
+    return await _rentalRequestRepository.getRentalRequestsByLessorId(uid);
+  }
+
+  Future<RentalRequest> acceptRentalRequest(int id) async {
+    return await _rentalRequestRepository.acceptRentalRequest(id);
+  }
+
+  Future<RentalRequest> declineRentalRequest(int id) async {
+    return await _rentalRequestRepository.declineRentalRequest(id);
+  }
 }

@@ -10,4 +10,9 @@ class RentalOfferService {
   Future<List<RentalOffer>> getVisibleRentalOffer() async {
     return await _rentalOfferRepository.getVisibleRentalOffer();
   }
+
+  Future<RentalOffer> saveRentalOffer(
+      RentalOffer rentalOffer, String uid) async {
+    return await _rentalOfferRepository.saveRentalOffer(rentalOffer, uid);
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/close_created_property_widget.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +19,7 @@ class _PropertyDirectionState extends State<PropertyDirection> {
       body: Column(
         children: [
           Container(
-            color: Colors.orange.shade400,
+            color: ColorsApp.primaryColor2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -26,9 +28,17 @@ class _PropertyDirectionState extends State<PropertyDirection> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Icon(Icons.close),
-                      Text("Complete"),
-                      Icon(Icons.help),
+                      CloseCreatePropertyWidget(),
+                      Text(
+                        "location Property",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(
+                        Icons.help,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                 ),
@@ -36,8 +46,9 @@ class _PropertyDirectionState extends State<PropertyDirection> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
                   child: Text(
-                    "Donde Se Encuentra su espacio?",
+                    "Where is your property?",
                     style: TextStyle(
+                      color: Colors.white,
                       fontSize: 30.0,
                       fontWeight: FontWeight.w600,
                     ),
@@ -76,7 +87,9 @@ class _PropertyDirectionState extends State<PropertyDirection> {
                           color: Colors.black,
                           fontSize: 16.0,
                         ),
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          propertyProvider.setLocation(value);
+                        },
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                           prefixIcon: Icon(

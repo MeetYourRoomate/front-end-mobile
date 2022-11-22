@@ -1,9 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/property_asset_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_feature_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/property_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_offer_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property_asset.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/model_property.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/property_description.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/new_property/property_direction.dart';
@@ -21,11 +27,18 @@ class TypePropertyPage extends StatefulWidget {
 }
 
 class _TypePropertyPageState extends State<TypePropertyPage> {
-  final PropertyService propertyService = locator<PropertyService>();
+  final RentalOfferService rentalOfferService = locator<RentalOfferService>();
   final PropertyAssetService propertyAssetService =
       locator<PropertyAssetService>();
+  final PropertyFeatureService propertyFeatureService =
+      locator<PropertyFeatureService>();
+
+  void back() {
+    Navigator.pop(context);
+  }
 
   PageController pageController = PageController();
+  final storage = FirebaseStorage.instance.ref();
   int pageindex = 0;
   bool isLast = false;
   @override
@@ -68,11 +81,11 @@ class _TypePropertyPageState extends State<TypePropertyPage> {
                     onTap: () {
                       if (pageindex >= 1) {
                         pageController.animateToPage(--pageindex,
-                            duration: Duration(milliseconds: 250),
+                            duration: const Duration(milliseconds: 250),
                             curve: Curves.bounceOut);
                       }
                     },
-                    child: Icon(Icons.arrow_back_ios),
+                    child: const Icon(Icons.arrow_back_ios),
                   ),
                   InkWell(
                     onTap: () {
@@ -80,33 +93,89 @@ class _TypePropertyPageState extends State<TypePropertyPage> {
                         pageController.animateToPage(++pageindex,
                             duration: const Duration(milliseconds: 250),
                             curve: Curves.bounceOut);
-                        print(FirebaseAuth.instance.currentUser!.uid);
                       }
                     },
                     child: isLast
                         ? InkWell(
                             onTap: () async {
-                              Property property = Property(
-                                null,
-                                propertyProvider.title,
-                                propertyProvider.description,
-                                null,
-                                null,
-                                null,
-                                null,
+                              final navigator = Navigator.of(context);
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: ColorsApp.primaryColor2,
+                                    ),
+                                  );
+                                },
                               );
-                              await propertyService.saveProperty(property,
-                                  FirebaseAuth.instance.currentUser!.uid);
+                              if (FirebaseAuth.instance.currentUser != null) {
+                                Property property = Property(
+                                  null,
+                                  propertyProvider.title,
+                                  propertyProvider.description,
+                                  propertyProvider.propertyType,
+                                  propertyProvider.location,
+                                  null,
+                                  null,
+                                );
+                                final datap =
+                                    await rentalOfferService.saveRentalOffer(
+                                        RentalOffer(
+                                          null,
+                                          propertyProvider.price,
+                                          propertyProvider.currency,
+                                          propertyProvider.conditions,
+                                          null,
+                                          null,
+                                          null,
+                                          property,
+                                        ),
+                                        FirebaseAuth.instance.currentUser!.uid);
+                                if (propertyProvider.selectedImage.isNotEmpty &&
+                                    datap.id != null) {
+                                  for (int i = 0;
+                                      i < propertyProvider.selectedImage.length;
+                                      i++) {
+                                    var imagePath =
+                                        "properties/${datap.property!.id}/image_$i";
+                                    final storaef = storage.child(imagePath);
+                                    await storaef.putFile(
+                                        propertyProvider.selectedImage[i]!);
+                                    final imageUrl = await storage
+                                        .child(imagePath)
+                                        .getDownloadURL();
+                                    propertyProvider.setAsset(
+                                        PropertyAsset(imageUrl, null));
+                                  }
+                                  await propertyAssetService
+                                      .saveListPropertyAssets(
+                                          propertyProvider.assets,
+                                          datap.property!.id!);
+                                  await propertyFeatureService
+                                      .saveListPropertyAssets(
+                                          propertyProvider.listFeature,
+                                          datap.property!.id!);
+                                }
+                              }
+                              propertyProvider.clear();
+                              navigator.pop();
+                              back();
                             },
                             child: Container(
                               height: 50,
                               width: 120,
                               decoration: BoxDecoration(
-                                color: Colors.orange,
+                                color: ColorsApp.primaryColor2,
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
                               child: const Center(
-                                child: Text("Publicar"),
+                                child: Text(
+                                  "Publicar",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
                           )

@@ -14,12 +14,20 @@ class PropertyModel extends Property {
   );
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
-    List<PropertyAssetModel> listAssets = json["assets"]
-        .map<PropertyAssetModel>((json) => PropertyAssetModel.fromJson(json))
-        .toList();
-    List<PropertyFeatureModel> listFeatures = json["propertyFeatureList"]
-        .map<PropertyFeatureModel>(
-            (json) => PropertyFeatureModel.fromJson(json));
+    List<PropertyAssetModel> listAssets = [];
+    List<PropertyFeatureModel> listFeatures = [];
+    if (json["assets"] != null) {
+      listAssets = json["assets"]
+          .map<PropertyAssetModel>((json) => PropertyAssetModel.fromJson(json))
+          .toList();
+    }
+    if (json["propertyFeatureList"] != null) {
+      listFeatures = json["propertyFeatureList"]
+          .map<PropertyFeatureModel>(
+              (json) => PropertyFeatureModel.fromJson(json))
+          .toList();
+    }
+
     return PropertyModel(
       json["id"],
       json["title"],

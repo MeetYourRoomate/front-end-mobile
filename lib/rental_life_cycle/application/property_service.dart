@@ -6,7 +6,7 @@ class PropertyService {
 
   PropertyService(this._propertyRepository);
 
-  Future<void> saveProperty(Property property, String uid) async {
+  Future<Property> saveProperty(Property property, String uid) async {
     return _propertyRepository.saveProperty(property, uid);
   }
 }

@@ -20,8 +20,27 @@ class RentalOfferDataSource {
           .toList();
       return lista;
     } else {
-      print(response.body);
       throw "Error";
+    }
+  }
+
+  Future<RentalOfferModel> saveRentalOffer(
+      RentalOfferModel rentalOfferModel, String uid) async {
+    final bodyData = jsonEncode(rentalOfferModel.toJson());
+
+    final response = await post(
+        Uri.parse(
+          "$baseUrl/users/$uid/rental/offer",
+        ),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: bodyData);
+    if (response.statusCode == 200) {
+      print(response.body);
+      return RentalOfferModel.fromJson(jsonDecode(response.body)["resource"]);
+    } else {
+      throw Exception("fallo la llamada");
     }
   }
 }

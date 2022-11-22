@@ -13,4 +13,8 @@ class UserProfileService {
   Future<void> saveUserProfile(UserProfile userProfile, String uid) async {
     await _userProfileRepository.saveUserProfile(userProfile, uid);
   }
+
+  Future<List<UserProfile>> getAllUsersProfiles() async {
+    return await _userProfileRepository.getAllUsersProfiles();
+  }
 }

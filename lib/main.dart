@@ -12,6 +12,7 @@ import 'package:meet_your_roommate_app/iam/presentation/page/create_profile_page
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/property_request.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -38,13 +39,14 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: ((context) => PropertyProvider())),
         ChangeNotifierProvider(create: (context) => UserProfileProvider()),
+        ChangeNotifierProvider(create: (context) => PropertyRequestProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const FatTest(),
+        home: const AuthenticationController(),
       ),
     );
   }
