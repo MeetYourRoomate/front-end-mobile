@@ -10,15 +10,11 @@ class AuthenticationController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProfileProvider = Provider.of<UserProfileProvider>(context);
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
-            if (userProfileProvider.id != -1) {
-              userProfileProvider.setUserProfileProvider(snapshot.data!.uid);
-            }
             return const UserController();
           } else {
             return const MainPageStudent();

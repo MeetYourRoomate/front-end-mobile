@@ -50,6 +50,13 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
+  void nextScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const AuthenticationController()));
+  }
+
   String error = "";
 
   bool isValidEmail = false;
@@ -175,9 +182,8 @@ class _LoginPageState extends State<LoginPage> {
                         );
                         await signIn();
                         navigator.pop();
-                        navigator.push(MaterialPageRoute(
-                            builder: (context) =>
-                                const AuthenticationController()));
+                        userProvider.setIsLogged(isLogged: true);
+                        nextScreen();
                       },
                       child: Container(
                         height: 45.0,
@@ -245,9 +251,9 @@ class _LoginPageState extends State<LoginPage> {
                                 "+51",
                               ),
                               user.uid);
-                          navigator.pop();
                         }
-                        userProvider.setIsLogged(isLogged: true);
+                        await userProvider.setIsLogged(isLogged: true);
+                        navigator.pop();
                       },
                       child: Container(
                         height: 35.0,

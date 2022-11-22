@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 
 import 'package:meet_your_roommate_app/iam/presentation/page/create_profile_page.dart';
+import 'package:meet_your_roommate_app/iam/user_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -23,7 +27,9 @@ class _RegisterPageState extends State<RegisterPage> {
       List a = await FirebaseAuth.instance
           .fetchSignInMethodsForEmail(_emailController.text.trim());
       if (a.isEmpty) {
-        errCorreo = "";
+        setState(() {
+          errCorreo = "";
+        });
       } else {
         setState(() {
           errCorreo = "Email already exists";
@@ -45,6 +51,18 @@ class _RegisterPageState extends State<RegisterPage> {
     return false;
   }
 
+  void nextScreen() {
+    if (errCorreo.isEmpty) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CreateProfilePage(
+                    email: _emailController.text.trim(),
+                    password: _passwordController.text.trim(),
+                  )));
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -55,10 +73,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool isValidEmail = false;
 
-  String errCorreo = "";
+  String errCorreo = " ";
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: GestureDetector(
@@ -212,18 +231,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 10.0,
                         ),
                         InkWell(
-                          onTap: () {
-                            signUp();
-                            if (errCorreo.isEmpty) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CreateProfilePage(
-                                            email: _emailController.text.trim(),
-                                            password:
-                                                _passwordController.text.trim(),
-                                          )));
-                            }
+                          onTap: () async {
+                            await signUp();
+                            userProvider.setIsLogged(isLogged: true);
+                            nextScreen();
                           },
                           child: Container(
                             height: 45.0,
@@ -245,35 +256,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         const SizedBox(
-                          height: 5.0,
-                        ),
-                        const Text(
-                          "Continue With",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w300,
-                          ),
+                          height: 15.0,
                         ),
                         const SizedBox(
-                          height: 5.0,
-                        ),
-                        InkWell(
-                          onTap: () async {},
-                          child: Container(
-                            height: 35.0,
-                            width: 60.0,
-                            decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Center(
-                              child: Image.asset(
-                                "lib/shared/assets/icon/google.png",
-                                height: 25.0,
-                              ),
-                            ),
-                          ),
+                          height: 15.0,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5.0),

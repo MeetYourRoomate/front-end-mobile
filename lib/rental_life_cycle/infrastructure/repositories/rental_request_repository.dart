@@ -9,15 +9,13 @@ class RentalRequestRepository implements RentalRequestInterface {
   RentalRequestRepository(this._rentalRequestDataSource);
 
   @override
-  Future<List<RentalRequest>> getRentalRequestsByOfferId(int uid) {
-    // TODO: implement getRentalRequestsByOfferId
-    throw UnimplementedError();
+  Future<List<RentalRequest>> getRentalRequestsByLessorId(String uid) async {
+    return await _rentalRequestDataSource.getRentalRequestsByLessorId(uid);
   }
 
   @override
-  Future<List<RentalRequest>> getRentalRequestsByUserId(String uid) {
-    // TODO: implement getRentalRequestsByUserId
-    throw UnimplementedError();
+  Future<List<RentalRequest>> getRentalRequestsByUserId(String uid) async {
+    return await _rentalRequestDataSource.getRentalRequestsByUserId(uid);
   }
 
   @override
@@ -32,5 +30,15 @@ class RentalRequestRepository implements RentalRequestInterface {
       rentalRequest.rentalOfferId,
     );
     await _rentalRequestDataSource.saveRentalRequest(rentalRequestModel);
+  }
+
+  @override
+  Future<RentalRequest> acceptRentalRequest(int id) async {
+    return await _rentalRequestDataSource.acceptRentalRequest(id);
+  }
+
+  @override
+  Future<RentalRequest> declineRentalRequest(int id) async {
+    return await _rentalRequestDataSource.declineRentalRequest(id);
   }
 }

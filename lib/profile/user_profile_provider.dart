@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
+import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
+import 'package:meet_your_roommate_app/profile/infraestructure/repositories/user_profile_repository.dart';
 
 class UserProfileProvider with ChangeNotifier {
+  List<UserProfile> _listProfiles = [];
+
   int _id = -1;
   String _name = "";
   String _surname = "";
@@ -20,20 +24,39 @@ class UserProfileProvider with ChangeNotifier {
   String get phoneCode => _phoneCode;
   String get description => _about;
   String get teamStatus => _teamStatus;
+  List<UserProfile> get listProfiles => _listProfiles;
 
   Future<void> setUserProfileProvider(String uid) async {
     UserProfileService userProfileService = locator<UserProfileService>();
 
     final data = await userProfileService.getUserProfileByUserId(uid);
+
     _id = data.id!;
     _name = data.name!;
     _surname = data.surname!;
-    _photoUrl = data.photoUrl!;
+    _photoUrl = data.photoUrl ?? "";
     _phoneNumber = data.phoneNumber!;
 
     _phoneCode = data.phoneCode!;
     _about = data.about!;
     _teamStatus = data.teamStatus!;
+    notifyListeners();
+  }
+
+  Future<void> clear() async {
+    _id = -1;
+    _name = "";
+    _surname = "";
+    _photoUrl = "";
+    _phoneNumber = "";
+    _phoneCode = "";
+    _about = "";
+    _teamStatus = "";
+  }
+
+  Future<void> setListProfiles() async {
+    UserProfileService userProfileService = locator<UserProfileService>();
+    _listProfiles = await userProfileService.getAllUsersProfiles();
     notifyListeners();
   }
 }

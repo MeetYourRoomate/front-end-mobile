@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +14,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   @override
   Widget build(BuildContext context) {
     final userProfileProvider = Provider.of<UserProfileProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        foregroundColor: Colors.black,
         title: const Text("Edit Profile"),
       ),
       body: SingleChildScrollView(
@@ -73,7 +76,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   children: [
                     const Text("Surname"),
                     TextFormField(
-                      initialValue: "...",
+                      initialValue: userProfileProvider.surname,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
@@ -98,7 +101,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   children: [
                     const Text("Gender"),
                     TextFormField(
-                      initialValue: "...",
+                      initialValue: "nannanana",
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
@@ -110,6 +113,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                 height: 10,
               ),
               Container(
+                height: 70,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.black,
@@ -118,14 +122,18 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    const Text("Email address"),
-                    TextFormField(
-                      initialValue: "...",
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Email address"),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(FirebaseAuth.instance.currentUser!.email!),
+                        ],
                       ),
                     ),
                   ],
@@ -135,6 +143,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                 height: 10,
               ),
               Container(
+                height: 70,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.black,
@@ -143,15 +152,18 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    const Text("Phone"),
-                    TextFormField(
-                      keyboardType: TextInputType.phone,
-                      initialValue: "...",
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text("Phone"),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text("xxxxxxxxx"),
+                        ],
                       ),
                     ),
                   ],

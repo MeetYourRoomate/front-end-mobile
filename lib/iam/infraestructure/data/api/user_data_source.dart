@@ -20,7 +20,7 @@ class UserDataSource {
     final responseValidated =
         await get(Uri.parse("$baseUrl/users/${userModel.id}"));
     if (responseValidated.statusCode == 200) {
-      return UserModel.fromJson(jsonDecode(responseValidated.body));
+      return UserModel.fromJson(jsonDecode(responseValidated.body)["resource"]);
     }
     final response = await post(
         Uri.parse(
@@ -32,7 +32,7 @@ class UserDataSource {
         body: bodyData);
 
     if (response.statusCode == 200) {
-      return UserModel.fromJson(jsonDecode(response.body));
+      return UserModel.fromJson(jsonDecode(response.body)["resource"]);
     } else {
       throw Exception("fallo la llamada");
     }
@@ -48,7 +48,7 @@ class UserDataSource {
         });
 
     if (response.statusCode == 200) {
-      return UserModel.fromJson(jsonDecode(response.body));
+      return UserModel.fromJson(jsonDecode(response.body)["resource"]);
     } else {
       throw Exception("fallo la llamada");
     }

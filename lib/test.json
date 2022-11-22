@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "message": "string",
+  "resource": {
+    "id": 0,
+    "studentRequestor": {
+      "id": 0,
+      "age": 0,
+      "name": "string",
+      "surname": "string",
+      "photoUrl": "string",
+      "gender": "string",
+      "about": "string",
+      "country": "string",
+      "city": "string",
+      "teamStatus": "ONTEAM",
+      "phone": {
+        "number": "string",
+        "code": "string"
+      },
+      "atributesSet": [
+        {
+          "id": "string",
+          "name": "string",
+          "value": "string",
+          "type": "string",
+          "audit": {
+            "createdAt": "2022-11-22T01:49:46.264Z",
+            "updatedAt": "2022-11-22T01:49:46.264Z"
+          }
+        }
+      ]
+    },
+    "studentRequested": {
+      "id": 0,
+      "age": 0,
+      "name": "string",
+      "surname": "string",
+      "photoUrl": "string",
+      "gender": "string",
+      "about": "string",
+      "country": "string",
+      "city": "string",
+      "teamStatus": "ONTEAM",
+      "phone": {
+        "number": "string",
+        "code": "string"
+      },
+      "atributesSet": [
+        {
+          "id": "string",
+          "name": "string",
+          "value": "string",
+          "type": "string",
+          "audit": {
+            "createdAt": "2022-11-22T01:49:46.264Z",
+            "updatedAt": "2022-11-22T01:49:46.264Z"
+          }
+        }
+      ]
+    },
+    "status": "PENDING"
+  }
+}

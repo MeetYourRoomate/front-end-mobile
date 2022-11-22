@@ -3,5 +3,5 @@ import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.
 abstract class PropertyInterface {
   Future<List<Property>> getProperties();
   Future<Property> getProperty();
-  Future<void> saveProperty(Property property, String uid);
+  Future<Property> saveProperty(Property property, String uid);
 }

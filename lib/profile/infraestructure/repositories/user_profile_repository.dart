@@ -9,9 +9,8 @@ class UserProfileRepository implements UserProfileInterface {
   UserProfileRepository(this._userProfileDataSource);
 
   @override
-  Future<List<UserProfile>> getAllUsersProfiles() {
-    // TODO: implement getAllUsersProfiles
-    throw UnimplementedError();
+  Future<List<UserProfile>> getAllUsersProfiles() async {
+    return await _userProfileDataSource.getAllUsersProfiles();
   }
 
   @override

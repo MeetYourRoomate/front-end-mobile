@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/animation.dart';
 
 class ColorsApp {

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
+import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/close_created_property_widget.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,12 +17,13 @@ class _ReviewPropertyState extends State<ReviewProperty> {
   @override
   Widget build(BuildContext context) {
     final propertyProvider = Provider.of<PropertyProvider>(context);
+    final userProfileProvider = Provider.of<UserProfileProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              color: Colors.orange.shade400,
+              color: ColorsApp.primaryColor2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -27,9 +32,17 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
-                        Icon(Icons.close),
-                        Text("Complete"),
-                        Icon(Icons.help),
+                        CloseCreatePropertyWidget(),
+                        Text(
+                          "Complete",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.help,
+                          color: Colors.white,
+                        ),
                       ],
                     ),
                   ),
@@ -40,6 +53,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                       "Dale un vistazo a tu nuevo anuncio",
                       style: TextStyle(
                         fontSize: 30.0,
+                        color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -55,13 +69,11 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                   Container(
                     height: 300.0,
                     decoration: BoxDecoration(
-                      color: Colors.red,
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            "https://images.adsttc.com/media/images/5f90/e509/63c0/1779/0100/010e/newsletter/3.jpg?1603331288"),
-                      ),
                       borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Image.file(
+                      propertyProvider.selectedImage[0]!,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   const SizedBox(
@@ -92,17 +104,13 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text("Francisco Torres  Paredes"),
+                          children: [
+                            Text(userProfileProvider.name),
                             Text("8 Propiedades"),
                             Text("5 Huéspedes"),
                           ],
                         ),
-                        const CircleAvatar(
-                          radius: 40.0,
-                          backgroundImage: NetworkImage(
-                              "https://fotografias.lasexta.com/clipping/cmsimages02/2022/05/03/6F9C82A4-0FA4-40F9-BE2F-87F8DBBC1224/elon-musk-met-gala_103.jpg?crop=1407,1055,x0,y18&width=1200&height=900&optimize=low&format=webply"),
-                        )
+                        CircleProfileAvatar(image: userProfileProvider.photoUrl)
                       ],
                     ),
                   ),
@@ -149,33 +157,22 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.kitchen),
-                                  Text("      Cocina"),
-                                ],
-                              ),
-                            ),
-                            Row(
-                              children: const [
-                                Icon(Icons.wifi),
-                                Text("      Cocina"),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: propertyProvider.listFeature.length,
+                          itemBuilder: ((context, index) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                    child: Text(propertyProvider
+                                        .listFeature[index].name!)),
+                                Text(propertyProvider.listFeature[index].type!),
                               ],
-                            ),
-                            Row(
-                              children: const [
-                                Icon(Icons.wash_rounded),
-                                Text("      Cocina"),
-                              ],
-                            ),
-                          ],
-                        ),
+                            );
+                          }),
+                        )
                       ],
                     ),
                   ),
@@ -183,7 +180,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           "Direccion",
                           style: TextStyle(
@@ -195,7 +192,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                           height: 10.0,
                         ),
                         Text(
-                          "Av Alameda San Marcos # 360, Chorrillos 15067, Perú Chorrillos, Provincia de Lima, Provincia de Lima",
+                          propertyProvider.location,
                           style: TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.w400,
@@ -207,7 +204,6 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                   Container(
                     height: 300,
                     decoration: BoxDecoration(
-                      color: Colors.red,
                       borderRadius: BorderRadius.circular(15.0),
                       image: const DecorationImage(
                         fit: BoxFit.cover,

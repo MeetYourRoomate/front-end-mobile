@@ -1,5 +1,5 @@
 import 'package:meet_your_roommate_app/profile/infraestructure/models/user_profile_model.dart';
-import 'package:meet_your_roommate_app/roommate_coexistance/domain/entity/roomate_request.dart';
+import 'package:meet_your_roommate_app/user_matching/domain/entity/roomate_request.dart';
 
 class RoommateRequestModel extends RoommateRequest {
   RoommateRequestModel(

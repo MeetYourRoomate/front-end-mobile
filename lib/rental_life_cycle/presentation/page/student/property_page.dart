@@ -1,7 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/hosted_profile_widget.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_request_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_request.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/image_carousel.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/property_provider.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/property_request.dart';
+import 'package:provider/provider.dart';
 
 class PropertyPage extends StatefulWidget {
   final RentalOffer rentalOffer;
@@ -11,11 +19,78 @@ class PropertyPage extends StatefulWidget {
   State<PropertyPage> createState() => _PropertyPageState();
 }
 
+const snackBar = SnackBar(
+  content: Text('Message sent!'),
+);
+
 class _PropertyPageState extends State<PropertyPage> {
+  final RentalRequestService rentalRequestService =
+      locator<RentalRequestService>();
+  final defaultList = [
+    "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/common%2FdefaultImage.jpeg?alt=media&token=d428210c-db58-4f65-b801-05605fea18d6"
+  ];
+
+  Icon validService(String service) {
+    switch (service) {
+      case "Wi-Fi":
+        return const Icon(Icons.wifi);
+
+      case "Tv":
+        return const Icon(Icons.tv);
+
+      case "Parking":
+        return const Icon(Icons.minor_crash_outlined);
+
+      case "Pool":
+        return const Icon(Icons.pool);
+
+      case "Store":
+        return const Icon(Icons.store);
+
+      case "Kitchen":
+        return const Icon(Icons.kitchen);
+
+      default:
+        return const Icon(Icons.error);
+    }
+  }
+
+  final List servicedefail = ["Vacio"];
+
+  void back() {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  bool find = false;
+  void validProperty(List<RentalRequest> listRental, id) {}
+  String message = "";
   @override
   Widget build(BuildContext context) {
+    final requestProvider = Provider.of<PropertyRequestProvider>(context);
+
+    if (requestProvider.listRequestStudent.isNotEmpty) {
+      for (int i = 0; i < requestProvider.listRequestStudent.length; i++) {
+        if (requestProvider.listRequestStudent[i].rentalOffer!.id ==
+            widget.rentalOffer.id) {
+          setState(() {
+            find = true;
+          });
+        } else {
+          setState(() {
+            find = false;
+          });
+        }
+      }
+    }
     final data = widget.rentalOffer.property!.assets;
-    final List images = data!.map((e) => e.imageUrl).toList();
+    final dataService = widget.rentalOffer.property!.features;
+
+    final List images =
+        data!.isNotEmpty ? data.map((e) => e.imageUrl).toList() : defaultList;
+    final List service = dataService!.isNotEmpty
+        ? dataService.map((e) => e.name).toList()
+        : servicedefail;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -136,44 +211,25 @@ class _PropertyPageState extends State<PropertyPage> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.kitchen),
-                                  Text("      kitchen"),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.wifi),
-                                  Text("      Wify"),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.wash_rounded),
-                                  Text("      whas"),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        service.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: service.length,
+                                itemBuilder: ((context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      children: [
+                                        validService(service[index]),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(service[index]),
+                                      ],
+                                    ),
+                                  );
+                                }))
+                            : const Text("Not Haver Services"),
                       ],
                     ),
                   ),
@@ -181,20 +237,20 @@ class _PropertyPageState extends State<PropertyPage> {
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Location",
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         Text(
-                          "Av Alameda San Marcos # 360, Chorrillos 15067, Perú Chorrillos, Provincia de Lima, Provincia de Lima",
-                          style: TextStyle(
+                          widget.rentalOffer.property!.location!,
+                          style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.w400,
                           ),
@@ -309,15 +365,106 @@ class _PropertyPageState extends State<PropertyPage> {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        height: 50,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: const Center(child: Text("Reserve")),
-      ),
+      floatingActionButton: find
+          ? InkWell(
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("add a message"),
+                    content: TextFormField(
+                      maxLines: 3,
+                      onChanged: (value) {
+                        setState(() {
+                          message = value;
+                        });
+                      },
+                    ),
+                    actions: [
+                      InkWell(
+                        onTap: () async {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            await rentalRequestService.saveRentalRequest(
+                                RentalRequest(
+                                    null,
+                                    null,
+                                    message,
+                                    null,
+                                    null,
+                                    FirebaseAuth.instance.currentUser!.uid,
+                                    widget.rentalOffer.id));
+                          }
+                          back();
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            border: Border.all(
+                              width: 1,
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                              child: Text(
+                            "Send",
+                            style: TextStyle(fontSize: 16),
+                          )),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            border: Border.all(
+                              width: 1,
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                              child: Text(
+                            "Cancel",
+                            style: TextStyle(fontSize: 16),
+                          )),
+                        ),
+                      ),
+                    ],
+                    actionsAlignment: MainAxisAlignment.center,
+                    actionsPadding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                  ),
+                );
+              },
+              child: Container(
+                height: 50,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: const Center(child: Text("Reserve")),
+              ),
+            )
+          : Container(
+              height: 50,
+              width: 100,
+              decoration: BoxDecoration(
+                color: ColorsApp.primeryColor,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: const Center(child: Text("Sent")),
+            ),
     );
   }
 }

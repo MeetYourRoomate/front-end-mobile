@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_request_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_request.dart';
 
 class LessorMessageWidget extends StatelessWidget {
+  final RentalRequest rentalRequest;
   final bool isPending;
-  const LessorMessageWidget({
-    super.key,
-    required this.isPending,
-  });
+  final bool isAcepted;
+  final bool isRejected;
+  const LessorMessageWidget(
+      {super.key,
+      this.isPending = false,
+      this.isAcepted = false,
+      this.isRejected = false,
+      required this.rentalRequest});
 
   @override
   Widget build(BuildContext context) {
+    String imageDefault =
+        rentalRequest.rentalOffer!.property!.assets!.isNotEmpty
+            ? rentalRequest.rentalOffer!.property!.assets!.first.imageUrl!
+            : "https://viviraqui.pe/upload/572vhy83gltyalwy.jpg";
+    String profile = rentalRequest.studentProfile!.photoUrl!.isNotEmpty
+        ? rentalRequest.studentProfile!.photoUrl!
+        : "";
+    RentalRequestService rentalRequestService = locator<RentalRequestService>();
     return Container(
       padding: const EdgeInsets.all(5),
       child: Column(
         children: [
           Row(
             children: [
-              const CircleProfileAvatar(
-                image: "",
+              CircleProfileAvatar(
+                image: profile,
                 radius: 30,
               ),
               Expanded(
@@ -25,19 +41,18 @@ class LessorMessageWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        "Juan Torres",
-                        style: TextStyle(
+                        rentalRequest.studentProfile!.name!,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text(
-                          "I would like to know details ussually and fully broked door append list and more "),
+                      Text(rentalRequest.message!),
                     ],
                   ),
                 ),
@@ -48,10 +63,8 @@ class LessorMessageWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.black12,
                     borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            "https://viviraqui.pe/upload/572vhy83gltyalwy.jpg"))),
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: NetworkImage(imageDefault))),
               )
             ],
           ),
@@ -61,7 +74,11 @@ class LessorMessageWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          final data = await rentalRequestService
+                              .declineRentalRequest(rentalRequest.id!);
+                          print("Rechazado ${data.message}");
+                        },
                         child: Container(
                           height: 30,
                           width: 70,
@@ -78,7 +95,10 @@ class LessorMessageWidget extends StatelessWidget {
                         width: 5,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          final data = await rentalRequestService
+                              .acceptRentalRequest(rentalRequest.id!);
+                        },
                         child: Container(
                           height: 30,
                           width: 70,

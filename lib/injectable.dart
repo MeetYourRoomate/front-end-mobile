@@ -6,17 +6,23 @@ import 'package:meet_your_roommate_app/profile/application/user_profile_service.
 import 'package:meet_your_roommate_app/profile/infraestructure/data/api/user_profile_data_source.dart';
 import 'package:meet_your_roommate_app/profile/infraestructure/repositories/user_profile_repository.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/property_asset_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_feature_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/property_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_offer_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_request_service.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/property_asset_data_source.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/property_data_source.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/property_feature_data_source.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/rental_offer_data_source.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/rental_request_data_source.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/repositories/property_asset_repository.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/repositories/property_feature_repository.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/repositories/property_repository.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/repositories/rental_offer_repository.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/repositories/rental_request_repository.dart';
+import 'package:meet_your_roommate_app/user_matching/application/roommate_request_service.dart';
+import 'package:meet_your_roommate_app/user_matching/infraestructure/data/api/roommate_request_data_source.dart';
+import 'package:meet_your_roommate_app/user_matching/infraestructure/repositories/roommate_request_repository.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -64,5 +70,21 @@ initIjectable() {
   locator.registerFactory<RentalRequestService>(
       () => RentalRequestService(locator.get()));
 
-  //
+  //property Feature
+
+  locator.registerFactory<PropertyFeatureDataSource>(
+      () => PropertyFeatureDataSource());
+  locator.registerFactory<PropertyFeatureRepository>(
+      () => PropertyFeatureRepository(locator.get()));
+  locator.registerFactory<PropertyFeatureService>(
+      () => PropertyFeatureService(locator.get()));
+
+  // Roommate request
+
+  locator.registerFactory<RoomateRequestDataSource>(
+      () => RoomateRequestDataSource());
+  locator.registerFactory<RoomateRequestRepository>(
+      () => RoomateRequestRepository(locator.get()));
+  locator.registerFactory<RoommateRequestService>(
+      () => RoommateRequestService(locator.get()));
 }

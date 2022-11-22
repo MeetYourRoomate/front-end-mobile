@@ -1,1 +1,2 @@
-String baseUrl = "http://192.168.18.10:8091/api/v1";
+String baseUrl =
+    "http://meetyourroommate.eastus.cloudapp.azure.com:8091/api/v1";

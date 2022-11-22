@@ -11,9 +11,9 @@ class PropertyAssetDataSource {
     for (int i = 0; i < assets.length; i++) {
       bodyData.add(assets[i].toJson());
     }
-    print(bodyData);
+
     final response = await post(
-      Uri.parse("$baseUrl/property/$id/assets"),
+      Uri.parse("$baseUrl/properties/$id/assets"),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },

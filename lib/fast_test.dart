@@ -1,11 +1,17 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/iam/application/user_service.dart';
+import 'package:meet_your_roommate_app/iam/domain/entity/user.dart';
 import 'package:meet_your_roommate_app/iam/infraestructure/data/api/user_data_source.dart';
 import 'package:meet_your_roommate_app/iam/infraestructure/models/user_model.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
+import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/infraestructure/data/api/user_profile_data_source.dart';
 import 'package:meet_your_roommate_app/profile/infraestructure/models/user_profile_model.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/property_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_offer_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_request_service.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/property.dart';
+import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_offer.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/rental_offer_data_source.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/rental_offer_model.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/image_carousel.dart';
@@ -18,9 +24,11 @@ class FatTest extends StatefulWidget {
 }
 
 class _FatTestState extends State<FatTest> {
-  final UserProfileDataSource _userProfileDataSource = UserProfileDataSource();
-  final RentalOfferDataSource _rentalOfferDataSource = RentalOfferDataSource();
-  final UserDataSource _userDataSource = UserDataSource();
+  final UserProfileService userProfileService = locator<UserProfileService>();
+  final RentalOfferService rentalOfferService = locator<RentalOfferService>();
+  final PropertyService propertyService = locator<PropertyService>();
+  final RentalRequestService rentalRequestService =
+      locator<RentalRequestService>();
 
   final List imageData = [
     "https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg",
@@ -37,40 +45,31 @@ class _FatTestState extends State<FatTest> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Stack(
-            //   children: [
-            //     ImageCarouselWidget(
-            //       images: imageData,
-            //     ),
-            //     Positioned(
-            //       left: 10,
-            //       top: 50,
-            //       child: InkWell(
-            //         onTap: () async {},
-            //         child: Container(
-            //           height: 40,
-            //           width: 40,
-            //           decoration: BoxDecoration(
-            //             color: Colors.black54,
-            //             borderRadius: BorderRadius.circular(50),
-            //           ),
-            //           child: const Center(
-            //             child: Icon(
-            //               Icons.arrow_back,
-            //               color: Colors.white,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             Center(
               child: InkWell(
                 onTap: () async {
-                  final data = await userService
-                      .getUserById("PnC68MOzbZeIAiLtdljhqL8be7F3");
-                  print(data.id);
+                  // Property property = Property(null, "title 2", "description 2",
+                  //     "tipe 2", "location 2", null, null);
+                  // final data = await rentalOfferService.saveRentalOffer(
+                  //   RentalOffer(
+                  //     null,
+                  //     100,
+                  //     "USD",
+                  //     "_conditions",
+                  //     null,
+                  //     null,
+                  //     null,
+                  //     property,
+                  //   ),
+                  //   "Zza7UXyX2uRvJ95OtVcFrqI37cx2",
+                  // );
+                  final data = await rentalRequestService
+                      .getRequestByUserId("PnC68MOzbZeIAiLtdljhqL8be7F3");
+                  if (data.isNotEmpty) {
+                    print(data[0].message);
+                  } else {
+                    print("Vacio");
+                  }
                 },
                 child: Container(
                   height: 70,

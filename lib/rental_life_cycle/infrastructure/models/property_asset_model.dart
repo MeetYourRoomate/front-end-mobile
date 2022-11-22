@@ -11,6 +11,8 @@ class PropertyAssetModel extends PropertyAsset {
   }
 
   Map<String, dynamic> toJson() {
-    return {"urlImage": imageUrl};
+    return {
+      "urlImage": imageUrl,
+    };
   }
 }
