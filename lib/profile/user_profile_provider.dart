@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/application/user_profile_service.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
-import 'package:meet_your_roommate_app/profile/infraestructure/repositories/user_profile_repository.dart';
 
 class UserProfileProvider with ChangeNotifier {
   List<UserProfile> _listProfiles = [];
@@ -54,9 +53,10 @@ class UserProfileProvider with ChangeNotifier {
     _teamStatus = "";
   }
 
-  Future<void> setListProfiles() async {
+  Future<void> setListProfiles(String uid) async {
     UserProfileService userProfileService = locator<UserProfileService>();
-    _listProfiles = await userProfileService.getAllUsersProfiles();
+    _listProfiles =
+        await userProfileService.getAllUsersProfilesWithoutTeam(uid);
     notifyListeners();
   }
 }

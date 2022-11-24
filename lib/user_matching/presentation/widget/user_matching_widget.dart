@@ -1,24 +1,37 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
+import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/domain/entity/user_profile.dart';
+import 'package:meet_your_roommate_app/user_matching/application/roommate_request_service.dart';
 
-class UserMatchingWidget extends StatelessWidget {
+class UserMatchingWidget extends StatefulWidget {
   final List<UserProfile> profiles;
   final List images;
   const UserMatchingWidget(
       {super.key, required this.images, required this.profiles});
 
   @override
+  State<UserMatchingWidget> createState() => _UserMatchingWidgetState();
+}
+
+class _UserMatchingWidgetState extends State<UserMatchingWidget> {
+  RoommateRequestService roommateRequestService =
+      locator<RoommateRequestService>();
+  int profileId = -1;
+
+  @override
   Widget build(BuildContext context) {
     String imagedefaul =
         "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/common%2Fwhatsapp-foto-perfil.jpg?alt=media&token=6971551c-7299-417c-915f-a8952a452712";
 
-    return profiles.isNotEmpty
+    return widget.profiles.isNotEmpty
         ? Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CarouselSlider.builder(
-                itemCount: profiles.length,
+                itemCount: widget.profiles.length,
                 itemBuilder: ((context, index, realIndex) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -27,15 +40,15 @@ class UserMatchingWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.transparent,
                           border: Border.all(
-                            color: Colors.orange,
-                            width: 1,
+                            color: ColorsApp.primaryColor2,
+                            width: 2,
                           ),
                           borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                profiles[index].photoUrl!.isNotEmpty
-                                    ? profiles[index].photoUrl!
+                                widget.profiles[index].photoUrl!.isNotEmpty
+                                    ? widget.profiles[index].photoUrl!
                                     : imagedefaul),
                           ),
                         ),
@@ -47,16 +60,16 @@ class UserMatchingWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "${profiles[index].name}, ${profiles[index].age}",
-                              style: TextStyle(
+                              "${widget.profiles[index].name}, ${widget.profiles[index].age}",
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 30,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
-                              "${profiles[index].country}  -  ${profiles[index].city}",
-                              style: TextStyle(
+                              "${widget.profiles[index].country}  -  ${widget.profiles[index].city}",
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
@@ -127,64 +140,37 @@ class UserMatchingWidget extends StatelessWidget {
                   viewportFraction: 0.8,
                   autoPlayCurve: Curves.easeInOut,
                   aspectRatio: 0.5,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      profileId = widget.profiles[index].id!;
+                    });
+                  },
                 ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.red.shade400,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.close,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ),
+              InkWell(
+                onTap: () async {
+                  if (FirebaseAuth.instance.currentUser != null) {
+                    final data =
+                        await roommateRequestService.createRoommateRequest(
+                            FirebaseAuth.instance.currentUser!.uid, profileId);
+                    print(data.status);
+                  }
+                },
+                child: Container(
+                  height: 90,
+                  width: 90,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.favorite,
+                      size: 50,
+                      color: Colors.white,
                     ),
                   ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: const BoxDecoration(
-                      color: Colors.transparent,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Image.asset("lib/shared/assets/icon/matching.png"),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 70,
-                      width: 70,
-                      decoration: const BoxDecoration(
-                        color: Colors.purple,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.favorite,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                ),
               )
             ],
           )

@@ -4,6 +4,7 @@ import 'package:meet_your_roommate_app/iam/application/auth_service.dart';
 import 'package:meet_your_roommate_app/iam/user_provider.dart';
 import 'package:meet_your_roommate_app/user_matching/presentation/page/roomie_matching_page.dart';
 import 'package:meet_your_roommate_app/roommate_coexistance/presentation/page/user_group_page.dart';
+import 'package:meet_your_roommate_app/user_matching/presentation/page/roommie_matches_page.dart';
 
 import 'package:provider/provider.dart';
 
@@ -57,12 +58,12 @@ class _RoomiePageState extends State<RoomiePage> {
                       ),
                     ],
                   ),
-                  Expanded(
+                  const Expanded(
                     child: TabBarView(
                       children: [
-                        const RoomieMatchingPage(),
-                        Container(),
-                        const UserGroupPage(),
+                        RoomieMatchingPage(),
+                        RoommieMatchesPage(),
+                        UserGroupPage(),
                       ],
                     ),
                   )

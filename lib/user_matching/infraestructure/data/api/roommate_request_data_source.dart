@@ -46,4 +46,34 @@ class RoomateRequestDataSource {
       throw Exception("fallo la llamada");
     }
   }
+
+  Future<List<RoommateRequestModel>> getAllRequestToUser(String uid) async {
+    final response =
+        await get(Uri.parse("$baseUrl/users/$uid/roommate/requestors"));
+    if (response.statusCode == 200) {
+      final data =
+          jsonDecode(response.body)["resource"].cast<Map<String, dynamic>>();
+      return data
+          .map<RoommateRequestModel>(
+              (json) => RoommateRequestModel.fromJson(json))
+          .toList();
+    } else {
+      throw "Error";
+    }
+  }
+
+  Future<List<RoommateRequestModel>> getAllRequestMadeByUser(String uid) async {
+    final response =
+        await get(Uri.parse("$baseUrl/users/$uid/roommate/requested"));
+    if (response.statusCode == 200) {
+      final data =
+          jsonDecode(response.body)["resource"].cast<Map<String, dynamic>>();
+      return data
+          .map<RoommateRequestModel>(
+              (json) => RoommateRequestModel.fromJson(json))
+          .toList();
+    } else {
+      throw "Error";
+    }
+  }
 }

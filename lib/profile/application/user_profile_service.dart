@@ -14,7 +14,7 @@ class UserProfileService {
     await _userProfileRepository.saveUserProfile(userProfile, uid);
   }
 
-  Future<List<UserProfile>> getAllUsersProfiles() async {
-    return await _userProfileRepository.getAllUsersProfiles();
+  Future<List<UserProfile>> getAllUsersProfilesWithoutTeam(String uid) async {
+    return await _userProfileRepository.getAllUsersProfilesWithoutTeam(uid);
   }
 }

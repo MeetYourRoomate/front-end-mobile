@@ -19,4 +19,12 @@ class RoommateRequestService {
     return await roomateRequestRepository.createRoommateRequest(
         requestor, requested);
   }
+
+  Future<List<RoommateRequest>> getAllRequestMadeByUser(String uid) async {
+    return await roomateRequestRepository.getAllRequestMadeByUser(uid);
+  }
+
+  Future<List<RoommateRequest>> getAllRequestToUser(String uid) async {
+    return await roomateRequestRepository.getAllRequestToUser(uid);
+  }
 }

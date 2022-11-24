@@ -76,9 +76,9 @@ class _MainPageStudentState extends State<MainPageStudent> {
               }
               break;
             case 3:
-              if (userProfileProvider.listProfiles.isEmpty &&
-                  FirebaseAuth.instance.currentUser != null) {
-                await userProfileProvider.setListProfiles();
+              if (FirebaseAuth.instance.currentUser != null) {
+                await userProfileProvider
+                    .setListProfiles(FirebaseAuth.instance.currentUser!.uid);
               }
               break;
             case 4:

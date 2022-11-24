@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:meet_your_roommate_app/profile/user_profile_provider.dart';
 import 'package:meet_your_roommate_app/user_matching/presentation/widget/user_matching_widget.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +39,7 @@ class _RoomieMatchingPageState extends State<RoomieMatchingPage> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Expanded(

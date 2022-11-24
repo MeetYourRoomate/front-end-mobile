@@ -23,4 +23,14 @@ class RoomateRequestRepository implements RoommateRequestInterface {
     return await roomateRequestDataSource.saveRoommaRequest(
         requestor, requested);
   }
+
+  @override
+  Future<List<RoommateRequest>> getAllRequestMadeByUser(String uid) async {
+    return await roomateRequestDataSource.getAllRequestMadeByUser(uid);
+  }
+
+  @override
+  Future<List<RoommateRequest>> getAllRequestToUser(String uid) async {
+    return await roomateRequestDataSource.getAllRequestToUser(uid);
+  }
 }

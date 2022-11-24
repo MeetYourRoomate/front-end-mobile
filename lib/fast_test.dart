@@ -15,6 +15,7 @@ import 'package:meet_your_roommate_app/rental_life_cycle/domain/entity/rental_of
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/data/api/rental_offer_data_source.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/rental_offer_model.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/image_carousel.dart';
+import 'package:meet_your_roommate_app/user_matching/application/roommate_request_service.dart';
 
 class FatTest extends StatefulWidget {
   const FatTest({super.key});
@@ -29,6 +30,8 @@ class _FatTestState extends State<FatTest> {
   final PropertyService propertyService = locator<PropertyService>();
   final RentalRequestService rentalRequestService =
       locator<RentalRequestService>();
+  final RoommateRequestService roommateRequestService =
+      locator<RoommateRequestService>();
 
   final List imageData = [
     "https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg",
@@ -63,10 +66,10 @@ class _FatTestState extends State<FatTest> {
                   //   ),
                   //   "Zza7UXyX2uRvJ95OtVcFrqI37cx2",
                   // );
-                  final data = await rentalRequestService
-                      .getRequestByUserId("PnC68MOzbZeIAiLtdljhqL8be7F3");
+                  final data = await roommateRequestService
+                      .getAllRequestToUser("PnC68MOzbZeIAiLtdljhqL8be7F3");
                   if (data.isNotEmpty) {
-                    print(data[0].message);
+                    print(data[0].id);
                   } else {
                     print("Vacio");
                   }

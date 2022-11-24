@@ -1,64 +1,383 @@
 {
   "success": true,
-  "message": "string",
+  "message": "",
   "resource": {
-    "id": 0,
-    "studentRequestor": {
-      "id": 0,
-      "age": 0,
-      "name": "string",
-      "surname": "string",
-      "photoUrl": "string",
-      "gender": "string",
-      "about": "string",
-      "country": "string",
-      "city": "string",
-      "teamStatus": "ONTEAM",
-      "phone": {
-        "number": "string",
-        "code": "string"
-      },
-      "atributesSet": [
-        {
-          "id": "string",
-          "name": "string",
-          "value": "string",
-          "type": "string",
-          "audit": {
-            "createdAt": "2022-11-22T01:49:46.264Z",
-            "updatedAt": "2022-11-22T01:49:46.264Z"
-          }
+    "id": 1,
+    "name": "Team-63f78512-924c-4fe1-a54d-4a0a9ca5afb7",
+    "roommates": [
+      {
+        "id": 1,
+        "profile": {
+          "id": 1,
+          "age": 0,
+          "name": "Denilson Ramirez",
+          "surname": "xxxxxx",
+          "photoUrl": "https://lh3.googleusercontent.com/a/ALm5wu1yBpWxNkuQzfbVwZtE9Nov7KmHd8ZyLk_tmvQN=s96-c",
+          "gender": "xxxxx",
+          "about": "",
+          "country": "xxxxxx",
+          "city": "xxxxxx",
+          "teamStatus": "ONTEAM",
+          "phone": {
+            "number": "xxxxxxxxx",
+            "code": "+51"
+          },
+          "atributesSet": []
         }
-      ]
-    },
-    "studentRequested": {
-      "id": 0,
-      "age": 0,
-      "name": "string",
-      "surname": "string",
-      "photoUrl": "string",
-      "gender": "string",
-      "about": "string",
-      "country": "string",
-      "city": "string",
-      "teamStatus": "ONTEAM",
-      "phone": {
-        "number": "string",
-        "code": "string"
       },
-      "atributesSet": [
-        {
-          "id": "string",
-          "name": "string",
-          "value": "string",
-          "type": "string",
-          "audit": {
-            "createdAt": "2022-11-22T01:49:46.264Z",
-            "updatedAt": "2022-11-22T01:49:46.264Z"
-          }
+      {
+        "id": 2,
+        "profile": {
+          "id": 3,
+          "age": 21,
+          "name": "Renato",
+          "surname": "Arredondo",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/profiles%2FD3zq6ScHmBVtnvKBzldDKiRuAci2%2F99dcb35a-a502-5549-88be-baec94f2c038?alt=media&token=5a9e7db0-421a-4fa5-a9ad-e0e4daddbfb4",
+          "gender": "MALE",
+          "about": "This is something about me",
+          "country": "Peru",
+          "city": "Lima",
+          "teamStatus": "ONTEAM",
+          "phone": {
+            "number": "987654678",
+            "code": "+51"
+          },
+          "atributesSet": [
+            {
+              "id": "01c7d165-f882-443a-ad7e-9cacd9003010",
+              "name": "sensitive",
+              "value": null,
+              "type": "personality",
+              "audit": {
+                "createdAt": "2022-11-22T00:46:18.000+00:00",
+                "updatedAt": "2022-11-22T00:46:18.000+00:00"
+              }
+            },
+            {
+              "id": "7798cc43-3577-4a35-a255-5ec684163d9e",
+              "name": "science",
+              "value": null,
+              "type": "interest",
+              "audit": {
+                "createdAt": "2022-11-22T00:46:26.000+00:00",
+                "updatedAt": "2022-11-22T00:46:26.000+00:00"
+              }
+            },
+            {
+              "id": "ef047e67-761e-46e8-bf55-528d2f382a2f",
+              "name": "honest",
+              "value": null,
+              "type": "personality",
+              "audit": {
+                "createdAt": "2022-11-22T00:46:22.000+00:00",
+                "updatedAt": "2022-11-22T00:46:22.000+00:00"
+              }
+            }
+          ]
         }
-      ]
-    },
-    "status": "PENDING"
+      }
+    ],
+    "duties": [
+      {
+        "id": "5e47554e-f802-4d35-9b01-2bb843e2ef42",
+        "title": "Dwadw",
+        "description": "dawdwa",
+        "status": "PENDING",
+        "dateline": "2022-11-25T00:00:00.000+00:00",
+        "roommateList": [],
+        "audit": {
+          "createdAt": "2022-11-24T13:51:27.000+00:00",
+          "updatedAt": "2022-11-24T13:51:27.000+00:00"
+        }
+      },
+      {
+        "id": "7265d12d-7b32-4b0a-a733-5eae8ee1867d",
+        "title": "Clean the kitchen",
+        "description": "Please clean the kitchen. The dishes should be washed, also.",
+        "status": "PENDING",
+        "dateline": "2022-11-23T00:00:00.000+00:00",
+        "roommateList": [
+          {
+            "id": 2,
+            "profile": {
+              "id": 3,
+              "age": 21,
+              "name": "Renato",
+              "surname": "Arredondo",
+              "photoUrl": "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/profiles%2FD3zq6ScHmBVtnvKBzldDKiRuAci2%2F99dcb35a-a502-5549-88be-baec94f2c038?alt=media&token=5a9e7db0-421a-4fa5-a9ad-e0e4daddbfb4",
+              "gender": "MALE",
+              "about": "This is something about me",
+              "country": "Peru",
+              "city": "Lima",
+              "teamStatus": "ONTEAM",
+              "phone": {
+                "number": "987654678",
+                "code": "+51"
+              },
+              "atributesSet": [
+                {
+                  "id": "01c7d165-f882-443a-ad7e-9cacd9003010",
+                  "name": "sensitive",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:18.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:18.000+00:00"
+                  }
+                },
+                {
+                  "id": "7798cc43-3577-4a35-a255-5ec684163d9e",
+                  "name": "science",
+                  "value": null,
+                  "type": "interest",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:26.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:26.000+00:00"
+                  }
+                },
+                {
+                  "id": "ef047e67-761e-46e8-bf55-528d2f382a2f",
+                  "name": "honest",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:22.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:22.000+00:00"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "audit": {
+          "createdAt": "2022-11-22T09:12:11.000+00:00",
+          "updatedAt": "2022-11-22T09:12:11.000+00:00"
+        }
+      },
+      {
+        "id": "a1ab6c09-d06c-47f5-9bfd-186b34ca27c7",
+        "title": "dwad",
+        "description": "wadwadwa",
+        "status": "PENDING",
+        "dateline": "2022-11-24T00:00:00.000+00:00",
+        "roommateList": [
+          {
+            "id": 2,
+            "profile": {
+              "id": 3,
+              "age": 21,
+              "name": "Renato",
+              "surname": "Arredondo",
+              "photoUrl": "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/profiles%2FD3zq6ScHmBVtnvKBzldDKiRuAci2%2F99dcb35a-a502-5549-88be-baec94f2c038?alt=media&token=5a9e7db0-421a-4fa5-a9ad-e0e4daddbfb4",
+              "gender": "MALE",
+              "about": "This is something about me",
+              "country": "Peru",
+              "city": "Lima",
+              "teamStatus": "ONTEAM",
+              "phone": {
+                "number": "987654678",
+                "code": "+51"
+              },
+              "atributesSet": [
+                {
+                  "id": "01c7d165-f882-443a-ad7e-9cacd9003010",
+                  "name": "sensitive",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:18.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:18.000+00:00"
+                  }
+                },
+                {
+                  "id": "7798cc43-3577-4a35-a255-5ec684163d9e",
+                  "name": "science",
+                  "value": null,
+                  "type": "interest",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:26.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:26.000+00:00"
+                  }
+                },
+                {
+                  "id": "ef047e67-761e-46e8-bf55-528d2f382a2f",
+                  "name": "honest",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:22.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:22.000+00:00"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "audit": {
+          "createdAt": "2022-11-24T13:45:02.000+00:00",
+          "updatedAt": "2022-11-24T13:45:02.000+00:00"
+        }
+      },
+      {
+        "id": "d57cc709-cdb2-4e16-a100-470998308177",
+        "title": "New duty",
+        "description": "Duty",
+        "status": "PENDING",
+        "dateline": "2022-11-24T00:00:00.000+00:00",
+        "roommateList": [
+          {
+            "id": 2,
+            "profile": {
+              "id": 3,
+              "age": 21,
+              "name": "Renato",
+              "surname": "Arredondo",
+              "photoUrl": "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/profiles%2FD3zq6ScHmBVtnvKBzldDKiRuAci2%2F99dcb35a-a502-5549-88be-baec94f2c038?alt=media&token=5a9e7db0-421a-4fa5-a9ad-e0e4daddbfb4",
+              "gender": "MALE",
+              "about": "This is something about me",
+              "country": "Peru",
+              "city": "Lima",
+              "teamStatus": "ONTEAM",
+              "phone": {
+                "number": "987654678",
+                "code": "+51"
+              },
+              "atributesSet": [
+                {
+                  "id": "01c7d165-f882-443a-ad7e-9cacd9003010",
+                  "name": "sensitive",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:18.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:18.000+00:00"
+                  }
+                },
+                {
+                  "id": "7798cc43-3577-4a35-a255-5ec684163d9e",
+                  "name": "science",
+                  "value": null,
+                  "type": "interest",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:26.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:26.000+00:00"
+                  }
+                },
+                {
+                  "id": "ef047e67-761e-46e8-bf55-528d2f382a2f",
+                  "name": "honest",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:22.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:22.000+00:00"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "audit": {
+          "createdAt": "2022-11-24T13:18:32.000+00:00",
+          "updatedAt": "2022-11-24T13:18:32.000+00:00"
+        }
+      },
+      {
+        "id": "e5fd1be4-2965-4583-9693-53096c495381",
+        "title": "Create new duty",
+        "description": "Description",
+        "status": "PENDING",
+        "dateline": "2022-11-24T00:00:00.000+00:00",
+        "roommateList": [],
+        "audit": {
+          "createdAt": "2022-11-24T13:44:20.000+00:00",
+          "updatedAt": "2022-11-24T13:44:20.000+00:00"
+        }
+      },
+      {
+        "id": "efe47d59-8b11-42f9-9425-8213fec7bc05",
+        "title": "New duty",
+        "description": "Description",
+        "status": "PENDING",
+        "dateline": "2022-11-23T00:00:00.000+00:00",
+        "roommateList": [
+          {
+            "id": 2,
+            "profile": {
+              "id": 3,
+              "age": 21,
+              "name": "Renato",
+              "surname": "Arredondo",
+              "photoUrl": "https://firebasestorage.googleapis.com/v0/b/meet-your-roommate-c7ed7.appspot.com/o/profiles%2FD3zq6ScHmBVtnvKBzldDKiRuAci2%2F99dcb35a-a502-5549-88be-baec94f2c038?alt=media&token=5a9e7db0-421a-4fa5-a9ad-e0e4daddbfb4",
+              "gender": "MALE",
+              "about": "This is something about me",
+              "country": "Peru",
+              "city": "Lima",
+              "teamStatus": "ONTEAM",
+              "phone": {
+                "number": "987654678",
+                "code": "+51"
+              },
+              "atributesSet": [
+                {
+                  "id": "01c7d165-f882-443a-ad7e-9cacd9003010",
+                  "name": "sensitive",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:18.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:18.000+00:00"
+                  }
+                },
+                {
+                  "id": "7798cc43-3577-4a35-a255-5ec684163d9e",
+                  "name": "science",
+                  "value": null,
+                  "type": "interest",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:26.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:26.000+00:00"
+                  }
+                },
+                {
+                  "id": "ef047e67-761e-46e8-bf55-528d2f382a2f",
+                  "name": "honest",
+                  "value": null,
+                  "type": "personality",
+                  "audit": {
+                    "createdAt": "2022-11-22T00:46:22.000+00:00",
+                    "updatedAt": "2022-11-22T00:46:22.000+00:00"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": 1,
+            "profile": {
+              "id": 1,
+              "age": 0,
+              "name": "Denilson Ramirez",
+              "surname": "xxxxxx",
+              "photoUrl": "https://lh3.googleusercontent.com/a/ALm5wu1yBpWxNkuQzfbVwZtE9Nov7KmHd8ZyLk_tmvQN=s96-c",
+              "gender": "xxxxx",
+              "about": "",
+              "country": "xxxxxx",
+              "city": "xxxxxx",
+              "teamStatus": "ONTEAM",
+              "phone": {
+                "number": "xxxxxxxxx",
+                "code": "+51"
+              },
+              "atributesSet": []
+            }
+          }
+        ],
+        "audit": {
+          "createdAt": "2022-11-22T15:45:17.000+00:00",
+          "updatedAt": "2022-11-22T15:45:17.000+00:00"
+        }
+      }
+    ]
   }
 }

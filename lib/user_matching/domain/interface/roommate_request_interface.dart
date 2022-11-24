@@ -5,4 +5,6 @@ abstract class RoommateRequestInterface {
   Future<RoommateRequest> acceptRequest(String requestId);
   Future<RoommateRequest> createRoommateRequest(
       String requestor, int requested);
+  Future<List<RoommateRequest>> getAllRequestMadeByUser(String uid);
+  Future<List<RoommateRequest>> getAllRequestToUser(String uid);
 }

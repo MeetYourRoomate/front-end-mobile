@@ -47,8 +47,10 @@ class UserProfileDataSource {
     }
   }
 
-  Future<List<UserProfileModel>> getAllUsersProfiles() async {
-    final response = await get(Uri.parse("$baseUrl/profiles"));
+  Future<List<UserProfileModel>> getAllUsersProfilesWithoutTeam(
+      String uid) async {
+    final response =
+        await get(Uri.parse("$baseUrl/users/$uid/profiles/without/team"));
 
     if (response.statusCode == 200) {
       final parsed =
