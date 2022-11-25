@@ -159,8 +159,8 @@ class _UserMatchingWidgetState extends State<UserMatchingWidget> {
                 child: Container(
                   height: 90,
                   width: 90,
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
+                  decoration: BoxDecoration(
+                    color: ColorsApp.primeryColor,
                     shape: BoxShape.circle,
                   ),
                   child: const Center(

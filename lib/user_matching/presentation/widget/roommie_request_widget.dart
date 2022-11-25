@@ -75,46 +75,40 @@ class _RoommieRequestWidgetState extends State<RoommieRequestWidget> {
                       widget.isReceived
                           ? Row(
                               children: [
-                                InkWell(
-                                  onTap: () async {},
-                                  child: Container(
-                                    height: 40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.green,
-                                        width: 2,
-                                      ),
+                                Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.green,
+                                      width: 2,
                                     ),
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.check,
-                                        color: Colors.green,
-                                      ),
+                                  ),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.check,
+                                      color: Colors.green,
                                     ),
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    height: 40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
+                                Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.red,
+                                      width: 2,
                                     ),
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.close,
-                                        color: Colors.red,
-                                      ),
+                                  ),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.close,
+                                      color: Colors.red,
                                     ),
                                   ),
                                 ),
@@ -123,8 +117,8 @@ class _RoommieRequestWidgetState extends State<RoommieRequestWidget> {
                           : Container(
                               height: 60,
                               width: 60,
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
+                              decoration: BoxDecoration(
+                                color: ColorsApp.primeryColor,
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(

@@ -86,11 +86,11 @@ class _LessorHomePageState extends State<LessorHomePage> {
                       width: 100.0,
                       decoration: BoxDecoration(
                         color: ColorsApp.primaryColor2,
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: const Center(
                           child: Text(
-                        "New",
+                        "NEW",
                         style: TextStyle(
                           color: Colors.white,
                         ),

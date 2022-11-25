@@ -38,24 +38,24 @@ class _LessorMainPageState extends State<LessorMainPage> {
           BottomNavigationBarItem(
             backgroundColor: ColorsApp.primaryColor2,
             icon: const Icon(Icons.home),
-            label: "Home",
+            label: "HOME",
           ),
           BottomNavigationBarItem(
             backgroundColor: ColorsApp.primaryColor2,
             icon: const Icon(Icons.message),
-            label: "message",
+            label: "MESSAGE",
           ),
           BottomNavigationBarItem(
             backgroundColor: ColorsApp.primaryColor2,
             icon: const Icon(
               Icons.admin_panel_settings,
             ),
-            label: "admin",
+            label: "ADMIN",
           ),
           BottomNavigationBarItem(
             backgroundColor: ColorsApp.primaryColor2,
             icon: const Icon(Icons.menu),
-            label: "menu",
+            label: "MENU",
           ),
         ],
         onTap: (value) async {

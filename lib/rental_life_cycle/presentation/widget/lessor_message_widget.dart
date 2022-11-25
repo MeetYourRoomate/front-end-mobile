@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_your_roommate_app/common/utils/colors.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
 import 'package:meet_your_roommate_app/rental_life_cycle/application/rental_request_service.dart';
@@ -70,7 +71,7 @@ class LessorMessageWidget extends StatelessWidget {
           ),
           isPending
               ? Container(
-                  padding: const EdgeInsets.only(left: 65),
+                  padding: const EdgeInsets.only(left: 1),
                   child: Row(
                     children: [
                       InkWell(
@@ -83,11 +84,16 @@ class LessorMessageWidget extends StatelessWidget {
                           height: 30,
                           width: 70,
                           decoration: BoxDecoration(
-                            color: Colors.red.shade500,
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: const Center(
-                            child: Text("Reject"),
+                            child: Text(
+                              "REJECT",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -103,14 +109,19 @@ class LessorMessageWidget extends StatelessWidget {
                           height: 30,
                           width: 70,
                           decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: ColorsApp.primaryColor2,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: const Center(
-                            child: Text("Acept"),
+                            child: Text(
+                              "ACCEPT",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )
