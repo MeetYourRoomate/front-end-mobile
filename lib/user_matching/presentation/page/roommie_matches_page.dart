@@ -69,11 +69,11 @@ class _RoommieMatchesPageState extends State<RoommieMatchesPage> {
                   child: TabBarView(
                 children: [
                   RoommieRequestWidget(
-                    isReceived: false,
+                    isSent: true,
                     listRequest: listRequested,
                   ),
                   RoommieRequestWidget(
-                    isReceived: true,
+                    isSent: false,
                     listRequest: listRequestors,
                   ),
                 ],

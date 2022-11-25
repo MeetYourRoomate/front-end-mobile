@@ -162,7 +162,7 @@ class _PropertyPageState extends State<PropertyPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Description",
+                        "DESCRIPTION",
                         style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.w700,
@@ -189,7 +189,7 @@ class _PropertyPageState extends State<PropertyPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Servicios",
+                          "SERVICES",
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.w700,
@@ -223,7 +223,7 @@ class _PropertyPageState extends State<PropertyPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Location",
+                          "LOCATION",
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.w700,

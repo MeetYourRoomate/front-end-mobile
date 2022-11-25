@@ -62,7 +62,7 @@ class _UserMatchingWidgetState extends State<UserMatchingWidget> {
                             Text(
                               "${widget.profiles[index].name}, ${widget.profiles[index].age}",
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 30,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -70,7 +70,7 @@ class _UserMatchingWidgetState extends State<UserMatchingWidget> {
                             Text(
                               "${widget.profiles[index].country}  -  ${widget.profiles[index].city}",
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -149,12 +149,24 @@ class _UserMatchingWidgetState extends State<UserMatchingWidget> {
               ),
               InkWell(
                 onTap: () async {
+                  final navigator = Navigator.of(context);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: ColorsApp.primaryColor2,
+                        ),
+                      );
+                    },
+                  );
                   if (FirebaseAuth.instance.currentUser != null) {
                     final data =
                         await roommateRequestService.createRoommateRequest(
                             FirebaseAuth.instance.currentUser!.uid, profileId);
                     print(data.status);
                   }
+                  navigator.pop();
                 },
                 child: Container(
                   height: 90,

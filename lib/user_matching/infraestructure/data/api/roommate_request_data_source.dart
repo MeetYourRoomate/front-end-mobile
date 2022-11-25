@@ -5,9 +5,13 @@ import 'package:meet_your_roommate_app/common/config/path.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/models/roommate_request_model.dart';
 
 class RoomateRequestDataSource {
-  Future<RoommateRequestModel> declineRequest(String requestId) async {
-    final response =
-        await get(Uri.parse("$baseUrl/roommate/request/$requestId/decline"));
+  Future<RoommateRequestModel> declineRequest(int requestId) async {
+    final response = await post(
+      Uri.parse("$baseUrl/roommate/request/$requestId/decline"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
 
     if (response.statusCode == 200) {
       return RoommateRequestModel.fromJson(
@@ -17,14 +21,19 @@ class RoomateRequestDataSource {
     }
   }
 
-  Future<RoommateRequestModel> acceptRequest(String requestId) async {
-    final response =
-        await get(Uri.parse("$baseUrl/roommate/request/$requestId/accept"));
+  Future<RoommateRequestModel> acceptRequest(int requestId) async {
+    final response = await post(
+      Uri.parse("$baseUrl/roommate/request/$requestId/accept"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
 
     if (response.statusCode == 200) {
       return RoommateRequestModel.fromJson(
           jsonDecode(response.body)["resource"]);
     } else {
+      print(response.body);
       throw Exception("fallo la llamada");
     }
   }
@@ -43,6 +52,7 @@ class RoomateRequestDataSource {
       return RoommateRequestModel.fromJson(
           jsonDecode(response.body)["resource"]);
     } else {
+      print(response.body);
       throw Exception("fallo la llamada");
     }
   }

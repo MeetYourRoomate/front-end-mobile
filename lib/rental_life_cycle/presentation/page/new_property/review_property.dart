@@ -80,7 +80,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                     height: 10.0,
                   ),
                   Text(propertyProvider.title),
-                  Text("Precio : ${propertyProvider.price.toString()}"),
+                  Text("Price : ${propertyProvider.price.toString()}"),
                   Container(
                     padding: const EdgeInsets.all(15.0),
                     height: 120,
@@ -121,7 +121,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Descripcion",
+                        "Description",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w700,
@@ -148,7 +148,7 @@ class _ReviewPropertyState extends State<ReviewProperty> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Servicios",
+                          "Services",
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w700,

@@ -10,6 +10,7 @@ import 'package:meet_your_roommate_app/rental_life_cycle/presentation/page/stude
 import 'package:meet_your_roommate_app/rental_life_cycle/property_request.dart';
 import 'package:meet_your_roommate_app/roommate_coexistance/presentation/page/roomie_page.dart';
 import 'package:meet_your_roommate_app/social_interaction/presentation/page/favorite_page.dart';
+import 'package:meet_your_roommate_app/user_matching/team_provider.dart';
 import 'package:provider/provider.dart';
 
 class MainPageStudent extends StatefulWidget {
@@ -35,6 +36,7 @@ class _MainPageStudentState extends State<MainPageStudent> {
   Widget build(BuildContext context) {
     final requestProvider = Provider.of<PropertyRequestProvider>(context);
     final userProfileProvider = Provider.of<UserProfileProvider>(context);
+    final teamProvider = Provider.of<TeamProvider>(context);
     return Scaffold(
       body: pages[_index],
       bottomNavigationBar: BottomNavigationBar(
@@ -79,6 +81,8 @@ class _MainPageStudentState extends State<MainPageStudent> {
               if (FirebaseAuth.instance.currentUser != null) {
                 await userProfileProvider
                     .setListProfiles(FirebaseAuth.instance.currentUser!.uid);
+                await teamProvider
+                    .setTeam(FirebaseAuth.instance.currentUser!.uid);
               }
               break;
             case 4:

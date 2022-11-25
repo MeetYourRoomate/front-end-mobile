@@ -4,12 +4,13 @@ import 'package:meet_your_roommate_app/injectable.dart';
 import 'package:meet_your_roommate_app/profile/presentation/widget/circle_avatar_profile_widget.dart';
 import 'package:meet_your_roommate_app/user_matching/application/roommate_request_service.dart';
 import 'package:meet_your_roommate_app/user_matching/domain/entity/roomate_request.dart';
+import 'package:meet_your_roommate_app/user_matching/presentation/widget/status_request.dart';
 
 class RoommieRequestWidget extends StatefulWidget {
   final List<RoommateRequest> listRequest;
-  final bool isReceived;
+  final bool isSent;
   const RoommieRequestWidget(
-      {super.key, required this.isReceived, required this.listRequest});
+      {super.key, required this.isSent, required this.listRequest});
 
   @override
   State<RoommieRequestWidget> createState() => _RoommieRequestWidgetState();
@@ -55,66 +56,25 @@ class _RoommieRequestWidgetState extends State<RoommieRequestWidget> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              widget.isReceived
+                              widget.isSent
                                   ? Text(
-                                      "${widget.listRequest[index].studentRequestor!.name}  ${widget.listRequest[index].studentRequestor!.surname}")
+                                      "${widget.listRequest[index].studentRequested!.name}  ${widget.listRequest[index].studentRequested!.surname}")
                                   : Text(
-                                      "${widget.listRequest[index].studentRequested!.name}  ${widget.listRequest[index].studentRequested!.surname}"),
+                                      "${widget.listRequest[index].studentRequestor!.name}  ${widget.listRequest[index].studentRequestor!.surname}"),
                               const SizedBox(
                                 height: 5,
                               ),
-                              widget.isReceived
+                              widget.isSent
                                   ? Text(
-                                      "${widget.listRequest[index].studentRequestor!.age}")
+                                      "${widget.listRequest[index].studentRequested!.age}")
                                   : Text(
-                                      "${widget.listRequest[index].studentRequestor!.age}"),
+                                      "${widget.listRequest[index].studentRequested!.age}"),
                             ],
                           ),
                         ),
                       ),
-                      widget.isReceived
-                          ? Row(
-                              children: [
-                                Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.green,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.check,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.close,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Container(
+                      widget.isSent
+                          ? Container(
                               height: 60,
                               width: 60,
                               decoration: BoxDecoration(
@@ -127,6 +87,9 @@ class _RoommieRequestWidgetState extends State<RoommieRequestWidget> {
                                 color: Colors.white,
                               )),
                             )
+                          : StatusRequest(
+                              status: widget.listRequest[index].status!,
+                              id: widget.listRequest[index].id!)
                     ],
                   ),
                 ),

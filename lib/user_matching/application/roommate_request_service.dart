@@ -6,11 +6,11 @@ class RoommateRequestService {
 
   RoommateRequestService(this.roomateRequestRepository);
 
-  Future<RoommateRequest> acceptRequest(String requestId) async {
+  Future<RoommateRequest> acceptRequest(int requestId) async {
     return await roomateRequestRepository.acceptRequest(requestId);
   }
 
-  Future<RoommateRequest> declineRequest(String requestId) async {
+  Future<RoommateRequest> declineRequest(int requestId) async {
     return await roomateRequestRepository.declineRequest(requestId);
   }
 

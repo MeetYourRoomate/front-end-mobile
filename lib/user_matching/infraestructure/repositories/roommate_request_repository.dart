@@ -8,12 +8,12 @@ class RoomateRequestRepository implements RoommateRequestInterface {
   RoomateRequestRepository(this.roomateRequestDataSource);
 
   @override
-  Future<RoommateRequest> acceptRequest(String requestId) async {
+  Future<RoommateRequest> acceptRequest(int requestId) async {
     return await roomateRequestDataSource.acceptRequest(requestId);
   }
 
   @override
-  Future<RoommateRequest> declineRequest(String requestId) async {
+  Future<RoommateRequest> declineRequest(int requestId) async {
     return await roomateRequestDataSource.declineRequest(requestId);
   }
 
