@@ -77,7 +77,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: GestureDetector(
@@ -233,7 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         InkWell(
                           onTap: () async {
                             await signUp();
-                            userProvider.setIsLogged(isLogged: true);
+
                             nextScreen();
                           },
                           child: Container(
