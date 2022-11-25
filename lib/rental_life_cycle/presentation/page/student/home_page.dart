@@ -100,7 +100,7 @@ class _HomePageStudentState extends State<HomePageStudent> {
                                   Container(
                                     height: 320.0,
                                     decoration: BoxDecoration(
-                                      color: Colors.yellow,
+                                      color: Colors.black12,
                                       borderRadius: BorderRadius.circular(15.0),
                                       image: DecorationImage(
                                         fit: BoxFit.cover,

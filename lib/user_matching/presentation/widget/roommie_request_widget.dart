@@ -57,16 +57,17 @@ class RoommieRequestWidget extends StatelessWidget {
                                   height: 40,
                                   width: 40,
                                   decoration: BoxDecoration(
+                                    color: Colors.black,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: Colors.green,
+                                      color: Colors.black,
                                       width: 2,
                                     ),
                                   ),
                                   child: const Center(
                                     child: Icon(
-                                      Icons.check,
-                                      color: Colors.green,
+                                      Icons.close,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -77,16 +78,17 @@ class RoommieRequestWidget extends StatelessWidget {
                                   height: 40,
                                   width: 40,
                                   decoration: BoxDecoration(
+                                    color: ColorsApp.primaryColor2,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: Colors.red,
+                                      color: ColorsApp.primaryColor2,
                                       width: 2,
                                     ),
                                   ),
                                   child: const Center(
                                     child: Icon(
-                                      Icons.close,
-                                      color: Colors.red,
+                                      Icons.check,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -95,8 +97,8 @@ class RoommieRequestWidget extends StatelessWidget {
                           : Container(
                               height: 60,
                               width: 60,
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
+                              decoration: BoxDecoration(
+                                color: ColorsApp.primeryColor,
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(
