@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meet_your_roommate_app/injectable.dart';
+import 'package:meet_your_roommate_app/roommate_coexistance/presentation/page/list_all_teams_page.dart';
 import 'package:meet_your_roommate_app/roommate_coexistance/presentation/page/my_team_page.dart';
 import 'package:meet_your_roommate_app/user_matching/application/team_service.dart';
 import 'package:meet_your_roommate_app/user_matching/domain/entity/team.dart';
@@ -64,7 +65,9 @@ class _UserGroupPageState extends State<UserGroupPage> {
                   child: TabBarView(
                 children: [
                   MyTeamPage(),
-                  Container(),
+                  ListAllTeamsPage(
+                    teams: teams,
+                  ),
                 ],
               ))
             ],

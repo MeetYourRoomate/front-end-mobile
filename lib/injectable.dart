@@ -22,13 +22,16 @@ import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/reposito
 import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/repositories/rental_request_repository.dart';
 import 'package:meet_your_roommate_app/user_matching/application/duty_service.dart';
 import 'package:meet_your_roommate_app/user_matching/application/roommate_request_service.dart';
+import 'package:meet_your_roommate_app/user_matching/application/team_request_service.dart';
 import 'package:meet_your_roommate_app/user_matching/application/team_service.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/data/api/duty_data_source.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/data/api/roommate_request_data_source.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/data/api/team_data_source.dart';
+import 'package:meet_your_roommate_app/user_matching/infraestructure/data/api/team_request_data_source.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/repositories/duty_repository.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/repositories/roommate_request_repository.dart';
 import 'package:meet_your_roommate_app/user_matching/infraestructure/repositories/team_repository.dart';
+import 'package:meet_your_roommate_app/user_matching/infraestructure/repositories/team_request_repository.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -104,4 +107,12 @@ initIjectable() {
   locator.registerFactory<TeamDataSource>(() => TeamDataSource());
   locator.registerFactory<TeamRepository>(() => TeamRepository(locator.get()));
   locator.registerFactory<TeamService>(() => TeamService(locator.get()));
+
+  // TeamRequest
+
+  locator.registerFactory<TeamRequestDataSource>(() => TeamRequestDataSource());
+  locator.registerFactory<TeamRequestRepository>(
+      () => TeamRequestRepository(locator.get()));
+  locator.registerFactory<TeamRequestService>(
+      () => TeamRequestService(locator.get()));
 }

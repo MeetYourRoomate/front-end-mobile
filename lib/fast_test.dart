@@ -17,6 +17,7 @@ import 'package:meet_your_roommate_app/rental_life_cycle/infrastructure/models/r
 import 'package:meet_your_roommate_app/rental_life_cycle/presentation/widget/image_carousel.dart';
 import 'package:meet_your_roommate_app/user_matching/application/duty_service.dart';
 import 'package:meet_your_roommate_app/user_matching/application/roommate_request_service.dart';
+import 'package:meet_your_roommate_app/user_matching/application/team_request_service.dart';
 import 'package:meet_your_roommate_app/user_matching/application/team_service.dart';
 
 class FatTest extends StatefulWidget {
@@ -37,6 +38,7 @@ class _FatTestState extends State<FatTest> {
 
   final TeamService teamService = locator<TeamService>();
   final DutyService dutyService = locator<DutyService>();
+  final TeamRequestService teamRequestService = locator<TeamRequestService>();
 
   final List imageData = [
     "https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado--1024x629.jpg",
@@ -71,9 +73,8 @@ class _FatTestState extends State<FatTest> {
                   //   ),
                   //   "Zza7UXyX2uRvJ95OtVcFrqI37cx2",
                   // );
-                  final data = await teamService
-                      .getTeamByUserId("zAtWqIHOzDTkc0K0vkw2ZvQiOeF3");
-                  print(data);
+                  final data = await teamService.getAllTeams();
+                  print(data.length);
                 },
                 child: Container(
                   height: 70,
